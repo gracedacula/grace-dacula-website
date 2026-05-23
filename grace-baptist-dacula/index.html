@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grace Baptist Dacula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  /* ─── BRAND TOKENS ─── */
+  :root {
+    --near-black:   #3F3736;  /* primary text / dark UI */
+    --ink:          #1D1E27;  /* deepest dark */
+    --sage:         #7A8C7E;  /* accent green */
+    --sand:         #BEB2A4;  /* warm neutral */
+    --stone:        #8D8178;  /* secondary text */
+    --cream:        #F5F2EE;  /* warm off-white bg */
+    --white:        #FFFFFF;
+
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    --max-w: 1180px;
+    --nav-h: 76px;
+  }
+
+  /* ─── RESET ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--near-black);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a  { text-decoration: none; color: inherit; }
+
+  /* ─── UTILITY ─── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+  .label {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.0;
+    color: var(--near-black);
+    text-transform: uppercase;
+  }
+  .section-title span { color: var(--sage); }
+  .body-text {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.72;
+    color: var(--stone);
+    font-weight: 300;
+  }
+
+  /* ─── PLACEHOLDER STYLE (delete when content is added) ─── */
+  .ph {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(122,140,126,0.07),
+      rgba(122,140,126,0.07) 6px,
+      transparent 6px,
+      transparent 14px
+    );
+    border: 1.5px dashed var(--sage);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    color: var(--sage);
+    display: inline-block;
+    margin: 4px 0;
+  }
+  .ph-block {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(122,140,126,0.07),
+      rgba(122,140,126,0.07) 6px,
+      transparent 6px,
+      transparent 14px
+    );
+    border: 1.5px dashed var(--sage);
+    border-radius: 8px;
+    padding: 24px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: var(--sage);
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .ph-img {
+    aspect-ratio: 16/9;
+    background: var(--cream);
+    border: 1.5px dashed var(--sand);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--stone);
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+  }
+  .ph-img svg { opacity: 0.35; }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+  }
+  .btn-primary {
+    background: var(--sage);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: #677a6b; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+  }
+  .btn-outline:hover { background: var(--white); color: var(--near-black); }
+  .btn-dark {
+    background: var(--near-black);
+    color: var(--white);
+  }
+  .btn-dark:hover { background: var(--ink); transform: translateY(-1px); }
+
+  /* ──────────────────────────────────────────
+     NAV
+  ────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    transition: background var(--transition), box-shadow var(--transition);
+  }
+  .nav.scrolled {
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+    backdrop-filter: blur(12px);
+  }
+  .nav .container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo svg { width: 38px; height: 38px; }
+  .nav-logo-text {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--white);
+    transition: color var(--transition);
+  }
+  .nav.scrolled .nav-logo-text { color: var(--near-black); }
+  .nav.scrolled .nav-logo svg path { stroke: var(--near-black); fill: none; }
+  .nav.scrolled .nav-logo svg .cross { fill: var(--near-black); stroke: none; }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+    transition: color var(--transition);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--sage);
+    transition: width var(--transition);
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--white); }
+  .nav.scrolled .nav-links a { color: var(--stone); }
+  .nav.scrolled .nav-links a:hover { color: var(--near-black); }
+
+  .nav-cta {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 11px 24px;
+    border-radius: 3px;
+    background: var(--sage);
+    color: var(--white);
+    transition: background var(--transition);
+    border: none;
+    cursor: pointer;
+  }
+  .nav-cta:hover { background: #677a6b; }
+
+  /* Hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    width: 26px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+    display: block;
+  }
+  .nav.scrolled .nav-hamburger span { background: var(--near-black); }
+
+  /* Mobile nav */
+  .mobile-menu {
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: var(--white);
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    padding: 40px 32px;
+    gap: 8px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+    color: var(--near-black);
+    letter-spacing: 0.04em;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--cream);
+  }
+  .mobile-menu a:hover { color: var(--sage); }
+
+  /* ──────────────────────────────────────────
+     HERO
+  ────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--ink) 0%,
+      #2a2830 40%,
+      #1a2420 100%
+    );
+  }
+  /* Decorative pattern overlay */
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--sage) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  /* Photo placeholder area */
+  .hero-photo {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 52%;
+    overflow: hidden;
+  }
+  .hero-photo-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2a3530 0%, #1a2520 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.25);
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    border-left: 1.5px dashed rgba(122,140,126,0.3);
+  }
+  .hero-photo-inner svg { opacity: 0.2; }
+  .hero-gradient {
+    position: absolute;
+    top: 0; right: 47%; bottom: 0;
+    width: 200px;
+    background: linear-gradient(to right, var(--ink), transparent);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: var(--nav-h);
+    max-width: 600px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--sage);
+  }
+  .hero-headline {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(52px, 7vw, 92px);
+    line-height: 0.92;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero-headline em {
+    color: var(--sage);
+    font-style: normal;
+  }
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    margin-bottom: 44px;
+    max-width: 440px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* Service times strip */
+  .service-strip {
+    background: var(--sage);
+    padding: 14px 0;
+  }
+  .service-strip .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+  }
+  .service-item-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-item-text { font-family: var(--font-head); font-size: 13px; letter-spacing: 0.06em; }
+  .service-item-text strong { display: block; font-weight: 700; font-size: 15px; }
+  .service-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.25); }
+
+  /* ──────────────────────────────────────────
+     WELCOME / ABOUT
+  ────────────────────────────────────────── */
+  .welcome {
+    padding: 100px 0;
+    background: var(--white);
+  }
+  .welcome .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .welcome-visual { position: relative; }
+  .welcome-img-frame {
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+  .welcome-accent {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    width: 160px;
+    height: 160px;
+    border: 3px solid var(--sage);
+    border-radius: 4px;
+    z-index: -1;
+  }
+  .welcome-badge {
+    position: absolute;
+    top: 32px; left: -24px;
+    background: var(--sage);
+    color: var(--white);
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: 3px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .welcome-text { display: flex; flex-direction: column; gap: 24px; }
+  .welcome-quote {
+    font-family: var(--font-head);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--near-black);
+    border-left: 3px solid var(--sage);
+    padding-left: 24px;
+  }
+
+  /* ──────────────────────────────────────────
+     WHAT TO EXPECT / PLAN A VISIT
+  ────────────────────────────────────────── */
+  .visit {
+    background: var(--cream);
+    padding: 100px 0;
+  }
+  .visit-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .step-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    border: 1px solid transparent;
+  }
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.07);
+    border-color: var(--sand);
+  }
+  .step-num {
+    font-family: var(--font-head);
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--sand);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .step-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--near-black);
+  }
+
+  /* ──────────────────────────────────────────
+     SERMON / WATCH
+  ────────────────────────────────────────── */
+  .sermons {
+    padding: 100px 0;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .sermons::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(122,140,126,0.08) 0%, transparent 70%);
+  }
+  .sermons-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 52px;
+    gap: 24px;
+  }
+  .sermons-top .section-title { color: var(--white); }
+  .sermon-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 24px;
+  }
+  .sermon-card {
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  .sermon-card:hover {
+    background: rgba(255,255,255,0.09);
+    transform: translateY(-3px);
+  }
+  .sermon-thumb {
+    aspect-ratio: 16/9;
+    background: rgba(255,255,255,0.04);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sermon-thumb-ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.18);
+    font-size: 11px;
+    font-family: 'Courier New', monospace;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .play-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--sage);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform var(--transition);
+  }
+  .sermon-card:hover .play-circle { transform: scale(1.1); }
+  .sermon-info { padding: 24px; }
+  .sermon-series {
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+  .sermon-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .sermon-meta {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+  }
+
+  /* ──────────────────────────────────────────
+     MINISTRIES
+  ────────────────────────────────────────── */
+  .ministries {
+    padding: 100px 0;
+    background: var(--white);
+  }
+  .ministries-header {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 64px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .min-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .min-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .min-card-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    gap: 8px;
+  }
+  .min-card:hover .min-card-bg { transform: scale(1.04); }
+  .min-card:nth-child(1) .min-card-bg { background: linear-gradient(160deg, #2d3530 0%, #1a2520 100%); }
+  .min-card:nth-child(2) .min-card-bg { background: linear-gradient(160deg, #3a3530 0%, #2a2520 100%); }
+  .min-card:nth-child(3) .min-card-bg { background: linear-gradient(160deg, #303535 0%, #1e2828 100%); }
+  .min-card:nth-child(4) .min-card-bg { background: linear-gradient(160deg, #352d30 0%, #252020 100%); }
+  .min-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(29,30,39,0.92) 0%, rgba(29,30,39,0.2) 60%, transparent 100%);
+  }
+  .min-card-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 24px;
+    z-index: 2;
+  }
+  .min-card-tag {
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .min-card-name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .min-card-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-top: 12px;
+    transition: color var(--transition);
+  }
+  .min-card:hover .min-card-arrow { color: var(--sage); }
+
+  /* ──────────────────────────────────────────
+     EVENTS
+  ────────────────────────────────────────── */
+  .events {
+    background: var(--cream);
+    padding: 100px 0;
+  }
+  .events-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 52px;
+    gap: 24px;
+  }
+  .events-list { display: flex; flex-direction: column; gap: 2px; }
+  .event-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    background: var(--white);
+    padding: 28px 32px;
+    border-radius: 4px;
+    transition: var(--transition);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+  }
+  .event-row:hover { border-left-color: var(--sage); transform: translateX(4px); }
+  .event-date {
+    font-family: var(--font-head);
+    text-align: center;
+  }
+  .event-date .day {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--near-black);
+    line-height: 1;
+  }
+  .event-date .month {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .event-info .ev-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--near-black);
+    margin-bottom: 4px;
+  }
+  .event-info .ev-detail {
+    font-size: 14px;
+    color: var(--stone);
+    font-weight: 300;
+  }
+  .event-tag {
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    background: var(--cream);
+    color: var(--stone);
+    white-space: nowrap;
+  }
+
+  /* ──────────────────────────────────────────
+     BELIEFS / VALUES BAND
+  ────────────────────────────────────────── */
+  .beliefs {
+    padding: 100px 0;
+    background: var(--near-black);
+    position: relative;
+    overflow: hidden;
+  }
+  .beliefs-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: radial-gradient(circle at 1px 1px, var(--white) 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+  .beliefs .container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .beliefs-left { display: flex; flex-direction: column; gap: 28px; }
+  .beliefs-left .section-title { color: var(--white); }
+  .beliefs-left .body-text { color: rgba(255,255,255,0.5); }
+  .beliefs-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .belief-item {
+    background: rgba(255,255,255,0.04);
+    padding: 36px 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: var(--transition);
+  }
+  .belief-item:hover { background: rgba(122,140,126,0.1); border-color: rgba(122,140,126,0.2); }
+  .belief-num {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+  .belief-name {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .belief-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+  }
+
+  /* ──────────────────────────────────────────
+     GIVE / GENEROSITY
+  ────────────────────────────────────────── */
+  .give {
+    background: var(--sage);
+    padding: 80px 0;
+  }
+  .give .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+  }
+  .give-text { display: flex; flex-direction: column; gap: 20px; }
+  .give-text .section-title { color: var(--white); }
+  .give-text .body-text { color: rgba(255,255,255,0.75); }
+  .give-visual {
+    background: rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .give-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 20px;
+  }
+  .give-stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .give-stat-num {
+    font-family: var(--font-head);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .give-stat-label {
+    font-family: var(--font-head);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+  .give-stat .ph { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.06); }
+
+  /* ──────────────────────────────────────────
+     CONNECT / CONTACT
+  ────────────────────────────────────────── */
+  .connect {
+    padding: 100px 0;
+    background: var(--white);
+  }
+  .connect-header {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 64px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .connect-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .connect-card {
+    border: 1px solid var(--sand);
+    border-radius: 6px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: var(--transition);
+  }
+  .connect-card:hover {
+    border-color: var(--sage);
+    box-shadow: 0 12px 32px rgba(122,140,126,0.12);
+    transform: translateY(-3px);
+  }
+  .connect-icon {
+    width: 48px; height: 48px;
+    border-radius: 4px;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .connect-icon svg { color: var(--sage); }
+  .connect-card-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--near-black);
+  }
+
+  /* ──────────────────────────────────────────
+     FOOTER
+  ────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    padding: 72px 0 32px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 52px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 32px;
+  }
+  .footer-brand { display: flex; flex-direction: column; gap: 20px; }
+  .footer-brand .body-text { color: rgba(255,255,255,0.4); font-size: 15px; }
+  .footer-logo { display: flex; align-items: center; gap: 12px; }
+  .footer-logo-text {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.4);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  .social-btn:hover { border-color: var(--sage); color: var(--sage); }
+
+  .footer-col-title {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    transition: color var(--transition);
+  }
+  .footer-col li a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); font-weight: 300; }
+
+  /* ──────────────────────────────────────────
+     SCROLL ANIMATIONS
+  ────────────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ──────────────────────────────────────────
+     RESPONSIVE
+  ────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .sermon-grid { grid-template-columns: 1fr 1fr; }
+    .sermon-grid .sermon-card:first-child { grid-column: span 2; }
+    .min-grid { grid-template-columns: repeat(2, 1fr); }
+    .beliefs .container { grid-template-columns: 1fr; gap: 52px; }
+    .give .container { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --nav-h: 64px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero-photo { display: none; }
+    .hero-content { max-width: 100%; }
+    .welcome .container { grid-template-columns: 1fr; }
+    .welcome-visual { order: -1; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .sermon-grid { grid-template-columns: 1fr; }
+    .sermon-grid .sermon-card:first-child { grid-column: span 1; }
+    .min-grid { grid-template-columns: 1fr 1fr; }
+    .beliefs-right { grid-template-columns: 1fr; }
+    .connect-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .event-row { grid-template-columns: 70px 1fr; }
+    .event-tag { display: none; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 20px; }
+    .min-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── LOGO SVG SYMBOL ─── -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="gbd-logo" viewBox="0 0 38 48">
+    <!-- bookmark shape -->
+    <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+    <!-- cross -->
+    <line x1="19" y1="12" x2="19" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="12" y1="19" x2="26" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+        <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="nav-logo-text">Grace Baptist Dacula</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#visit">Plan a Visit</a></li>
+      <li><a href="#sermons">Sermons</a></li>
+      <li><a href="#ministries">Ministries</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#give">Give</a></li>
+    </ul>
+    <button class="nav-cta">Plan a Visit</button>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#visit" onclick="closeMenu()">Plan a Visit</a>
+  <a href="#sermons" onclick="closeMenu()">Sermons</a>
+  <a href="#ministries" onclick="closeMenu()">Ministries</a>
+  <a href="#events" onclick="closeMenu()">Events</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#give" onclick="closeMenu()">Give</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-photo">
+    <div class="hero-photo-inner">
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      [ HERO PHOTO ]<br/>Full-congregation or worship shot<br/>Recommended: 1600×1200px
+    </div>
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="container">
+    <div class="hero-content reveal in">
+      <p class="hero-eyebrow">Grace Baptist Church · Dacula, GA</p>
+      <h1 class="hero-headline">
+        You Are<br/>
+        <em>Loved</em>
+      </h1>
+      <p class="hero-sub">
+        Whether you're new or looking for a church family, there's a place for you here.
+      </p>
+      <div class="hero-actions">
+        <a href="#visit" class="btn btn-primary">Plan a Visit</a>
+        <a href="#sermons" class="btn btn-outline">Watch Online</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICE TIMES STRIP ─── -->
+<div class="service-strip">
+  <div class="container">
+    <div class="service-item">
+      <div class="service-item-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/>
+          <path d="M12 7v5l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="service-item-text">
+        <strong>9:30 AM</strong>
+        Sunday Worship + Children's Worship
+      </div>
+    </div>
+    <div class="service-divider"></div>
+    <div class="service-item">
+      <div class="service-item-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/>
+          <path d="M12 7v5l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="service-item-text">
+        <strong>7:00 PM (Zoom)</strong>
+        Wednesday Bible Study
+      </div>
+    </div>
+    <div class="service-divider"></div>
+    <div class="service-item">
+      <div class="service-item-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="white" stroke-width="2"/>
+          <circle cx="12" cy="9" r="2.5" stroke="white" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="service-item-text">
+        <strong>2980 Old Peachtree Rd NE</strong>
+        Dacula, GA 30019
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── WELCOME / ABOUT ─── -->
+<section class="welcome" id="about">
+  <div class="container">
+    <div class="welcome-visual reveal">
+      <div class="welcome-img-frame">
+        <div class="ph-img" style="aspect-ratio:4/5;border-radius:4px">
+          <svg width="40" height="40" fill="none" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#8D8178" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#8D8178" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#8D8178" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          [ PASTOR / CONGREGATION PHOTO ]<br/>Portrait or candid — 800×1000px
+        </div>
+      </div>
+      <div class="welcome-accent"></div>
+      <div class="welcome-badge">Est. 2000</div>
+    </div>
+    <div class="welcome-text reveal reveal-d2">
+      <p class="label">Welcome to Grace</p>
+      <h2 class="section-title">A Church for<br/><span>Every Person</span></h2>
+      <blockquote class="welcome-quote">
+        Clear, expositional preaching of the Word of God is the heartbeat of Grace Baptist Church — and so is the community that gathers around it.
+      </blockquote>
+      <p class="body-text">
+        Grace Dacula is a story of God's varied grace. Since our beginning in the year 2000, our story at Grace Baptist Church of Dacula is a reminder that God's grace is sufficient for all.
+      </p>
+      <p class="body-text">
+        We are all different — Southerners, Northerners, immigrants, Native Georgians. We speak many languages and come from many walks of life. But we have one thing in common: a desire to know and love God, and to serve Him with all our heart.
+      </p>
+      <p class="body-text">
+        We enjoy being together. Our fellowship is sweet. The story of Grace Baptist is a story of a wonderful family fellowship — people loving other imperfect people the way Christ Jesus loves us. We would love for you to visit and we hope that our church family might become yours!
+      </p>
+      <a href="#about" class="btn btn-dark" style="margin-top:8px">Our Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLAN A VISIT ─── -->
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="visit-header reveal">
+      <p class="label">New Here?</p>
+      <h2 class="section-title">What to <span>Expect</span></h2>
+      <p class="body-text">We know showing up somewhere new can feel awkward — here's everything you need to know before Sunday.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal reveal-d1">
+        <div class="step-num">01</div>
+        <div class="step-title">Arrival &amp; Parking</div>
+        <p class="body-text">We're located at 2980 Old Peachtree Rd NE, Dacula, GA 30019. Greeters will welcome you at the door and help you find your way.</p>
+      </div>
+      <div class="step-card reveal reveal-d2">
+        <div class="step-num">02</div>
+        <div class="step-title">The Worship Service</div>
+        <p class="body-text">Clear, expositional preaching of God's Word is the heartbeat of Grace Baptist. Pastor Kimbrough leads our Sunday service with vibrant singing and Bible-centered teaching. Children's Worship runs at the same time for younger ones.</p>
+      </div>
+      <div class="step-card reveal reveal-d3">
+        <div class="step-num">03</div>
+        <div class="step-title">Grow &amp; Connect</div>
+        <p class="body-text">Beyond Sundays, join our Wednesday evening Zoom Bible study at 7:00 PM, or the Ladies Bible Study every Friday morning at 10:00 AM at the church.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#" class="btn btn-primary">Plan My Visit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERMONS ─── -->
+<section class="sermons" id="sermons">
+  <div class="container">
+    <div class="sermons-top reveal">
+      <div>
+        <p class="label">Teaching · Pastor Kimbrough</p>
+        <h2 class="section-title" style="color:white">Recent <span>Sermons</span></h2>
+        <p style="color:rgba(255,255,255,0.45);font-size:15px;margin-top:10px;font-weight:300;max-width:440px">Clear, expositional preaching of God's Word — watch live or on demand.</p>
+      </div>
+      <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="btn btn-outline">Full Archive →</a>
+    </div>
+    <!-- Videos injected by JS -->
+    <div class="sermon-grid" id="sermon-grid">
+      <!-- Loading state -->
+      <div class="sermon-card" style="opacity:0.4">
+        <div class="sermon-thumb" style="background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;aspect-ratio:16/9">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="sermon-info"><p class="sermon-series">Loading...</p></div>
+      </div>
+      <div class="sermon-card" style="opacity:0.25">
+        <div class="sermon-thumb" style="background:rgba(255,255,255,0.04);aspect-ratio:16/9"></div>
+        <div class="sermon-info"><p class="sermon-series">Loading...</p></div>
+      </div>
+      <div class="sermon-card" style="opacity:0.15">
+        <div class="sermon-thumb" style="background:rgba(255,255,255,0.04);aspect-ratio:16/9"></div>
+        <div class="sermon-info"><p class="sermon-series">Loading...</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MINISTRIES ─── -->
+<section class="ministries" id="ministries">
+  <div class="container">
+    <div class="ministries-header reveal">
+      <p class="label">Get Involved</p>
+      <h2 class="section-title">Ministries &amp; <span>Community</span></h2>
+      <p class="body-text">There's a place for you here — no matter your age, stage, or story.</p>
+    </div>
+  </div>
+  <div class="min-grid">
+    <!-- Ministry cards — add actual photography when ready -->
+    <div class="min-card reveal reveal-d1">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="9" cy="7" r="4" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 1<br/>e.g. Kids]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d2">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 2<br/>e.g. Students]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d3">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M12 8v4l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 3<br/>e.g. Men / Women]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d4">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 4<br/>e.g. Missions]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EVENTS ─── -->
+<section class="events" id="events">
+  <div class="container">
+    <div class="events-top reveal">
+      <div>
+        <p class="label">What's Coming Up</p>
+        <h2 class="section-title">Upcoming <span>Events</span></h2>
+      </div>
+    </div>
+    <!-- Google Calendar embed — auto-updates whenever an event is added to the church calendar -->
+    <div class="reveal" style="border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.06);">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=gracedacula%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&color=%237A8C7E"
+        style="border:0;width:100%;height:520px;display:block;"
+        frameborder="0"
+        scrolling="no"
+        title="Grace Baptist Dacula Events Calendar">
+      </iframe>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--stone);font-weight:300">
+      Events update automatically. Questions? Email <a href="mailto:gracedacula@gmail.com" style="color:var(--sage)">gracedacula@gmail.com</a>
+    </p>
+  </div>
+</section>
+
+<!-- ─── BELIEFS ─── -->
+<section class="beliefs">
+  <div class="beliefs-pattern"></div>
+  <div class="container">
+    <div class="beliefs-left reveal">
+      <p class="label">What We Believe</p>
+      <h2 class="section-title" style="color:white">Rooted in <span>Scripture</span></h2>
+      <p class="body-text"><span class="ph">[1–2 sentences on your theological foundation. Example: "We hold to the historic Baptist confessions and affirm the authority of Scripture in all matters of faith and practice."]</span></p>
+      <a href="#" class="btn btn-outline" style="margin-top:8px; border-color: var(--sage); color: var(--sage)">Full Statement of Faith →</a>
+    </div>
+    <div class="beliefs-right reveal reveal-d2">
+      <!-- Add / edit as many belief items as needed -->
+      <div class="belief-item">
+        <div class="belief-num">01</div>
+        <div class="belief-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[BELIEF — e.g. "Scripture"]</span></div>
+        <p class="belief-desc"><span class="ph" style="background:transparent;border:none;padding:0;color:rgba(255,255,255,0.45);font-size:13px">[1–2 sentences on this doctrine]</span></p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">02</div>
+        <div class="belief-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[BELIEF — e.g. "Salvation"]</span></div>
+        <p class="belief-desc"><span class="ph" style="background:transparent;border:none;padding:0;color:rgba(255,255,255,0.45);font-size:13px">[1–2 sentences]</span></p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">03</div>
+        <div class="belief-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[BELIEF — e.g. "The Church"]</span></div>
+        <p class="belief-desc"><span class="ph" style="background:transparent;border:none;padding:0;color:rgba(255,255,255,0.45);font-size:13px">[1–2 sentences]</span></p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">04</div>
+        <div class="belief-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[BELIEF — e.g. "Baptism"]</span></div>
+        <p class="belief-desc"><span class="ph" style="background:transparent;border:none;padding:0;color:rgba(255,255,255,0.45);font-size:13px">[1–2 sentences]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GIVE ─── -->
+<section class="give" id="give">
+  <div class="container">
+    <div class="give-text reveal">
+      <p class="label" style="color:rgba(255,255,255,0.7)">Generosity</p>
+      <h2 class="section-title" style="color:white">Give to the <span style="color:var(--ink)">Mission</span></h2>
+      <p class="body-text" style="color:rgba(255,255,255,0.8)">Because we've been given so much, we love giving back. Every gift supports our worship, Bible teaching, and outreach to the Dacula community and beyond.</p>
+      <p class="body-text" style="color:rgba(255,255,255,0.6);font-size:15px">Giving is secure and processed through Tithe.ly. You can give one-time or set up recurring giving below.</p>
+    </div>
+    <!-- Tithe.ly inline giving widget -->
+    <div class="reveal reveal-d2" style="background:white;border-radius:8px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.15);">
+      <iframe
+        src="https://tithe.ly/give_new/www/#/tithely/give-one-time/1530282"
+        style="border:0;width:100%;height:680px;display:block;"
+        frameborder="0"
+        scrolling="auto"
+        title="Give to Grace Baptist Dacula">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONNECT ─── -->
+<section class="connect" id="connect">
+  <div class="container">
+    <div class="connect-header reveal">
+      <p class="label">Stay Connected</p>
+      <h2 class="section-title">We'd Love to <span>Hear from You</span></h2>
+      <p class="body-text">Whether you're visiting for the first time, have a prayer request, or just want to learn more — fill out a connect card and we'll be in touch.</p>
+    </div>
+
+    <!-- Two-column: form + contact info -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="connect-main reveal">
+
+      <!-- ── CONNECT CARD FORM ── -->
+      <div>
+        <h3 style="font-family:var(--font-head);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--near-black);margin-bottom:28px;">Connect Card</h3>
+        <form
+          action="https://formspree.io/f/gracedacula"
+          method="POST"
+          id="connect-form"
+          style="display:flex;flex-direction:column;gap:16px;">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">First Name *</label>
+              <input type="text" name="first_name" required placeholder="Grace"
+                style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+                onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Last Name *</label>
+              <input type="text" name="last_name" required placeholder="Baptist"
+                style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+                onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Email Address *</label>
+            <input type="email" name="email" required placeholder="you@example.com"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Phone Number</label>
+            <input type="tel" name="phone" placeholder="(678) 000-0000"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:8px;">I am a…</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="First-time visitor" style="accent-color:var(--sage)"/> First-time visitor
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="Regular attendee" style="accent-color:var(--sage)"/> Regular attendee
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="Member" style="accent-color:var(--sage)"/> Member
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Message or Prayer Request</label>
+            <textarea name="message" rows="4" placeholder="Share anything on your heart…"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;resize:vertical;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"></textarea>
+          </div>
+
+          <!-- Honeypot spam prevention -->
+          <input type="text" name="_gotcha" style="display:none"/>
+          <input type="hidden" name="_subject" value="New Connect Card — Grace Baptist Dacula"/>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;" id="submit-btn">
+            Send Connect Card →
+          </button>
+          <p id="form-success" style="display:none;color:var(--sage);font-size:14px;text-align:center;font-weight:500;">
+            ✓ Thanks! We'll be in touch soon.
+          </p>
+          <p id="form-error" style="display:none;color:#b83131;font-size:14px;text-align:center;">
+            Something went wrong. Please email us directly at <a href="mailto:gracedacula@gmail.com" style="color:#b83131;">gracedacula@gmail.com</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- ── CONTACT INFO + MAP ── -->
+      <div style="display:flex;flex-direction:column;gap:32px;">
+        <div>
+          <h3 style="font-family:var(--font-head);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--near-black);margin-bottom:24px;">Find Us</h3>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#7A8C7E" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#7A8C7E" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Address</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.5;">2980 Old Peachtree Rd NE<br/>Dacula, GA 30019</p>
+                <a href="https://maps.app.goo.gl/2DaQqVV2UgXk5zZJA" target="_blank" style="font-size:13px;color:var(--sage);font-weight:600;margin-top:4px;display:inline-block;">Get Directions →</a>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7A8C7E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#7A8C7E" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Service Times</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.7;">Sunday Worship &amp; Children's — 9:30 AM<br/>Wednesday Bible Study — 7:00 PM (Zoom)<br/>Ladies Bible Study — Fri 10:00 AM</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.36 12a19.79 19.79 0 01-3.07-8.67 2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="#7A8C7E" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Phone &amp; Email</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.7;"><a href="tel:+16789850705" style="color:var(--near-black);">(678) 985-0705</a><br/><a href="mailto:gracedacula@gmail.com" style="color:var(--sage);">gracedacula@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Map embed -->
+        <div style="border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.3480642377713!2d-83.92825602428537!3d34.00927557317321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5eaaeb4380005%3A0x2a6408724ffe641a!2s2980%20Old%20Peachtree%20Rd%20NE%2C%20Dacula%2C%20GA%2030019%2C%20USA!5e0!3m2!1sen!2sph!4v1773737784215!5m2!1sen!2sph"
+            width="100%"
+            height="260"
+            style="border:0;display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Grace Baptist Dacula location map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="32" height="40" viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+            <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="footer-logo-text">Grace Baptist<br/>Dacula</div>
+        </div>
+        <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">People loving other imperfect people the way Christ Jesus loves us.</p>
+        <div class="footer-socials">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="social-btn" title="YouTube">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+          <!-- Spotify / Podcast -->
+          <a href="#" class="social-btn" title="Podcast">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit</p>
+        <ul>
+          <li><a href="#">Plan a Visit</a></li>
+          <li><a href="#">Service Times</a></li>
+          <li><a href="#">Directions &amp; Parking</a></li>
+          <li><a href="#">Kids Ministry</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Grow</p>
+        <ul>
+          <li><a href="#">Sermon Archive</a></li>
+          <li><a href="#">Small Groups</a></li>
+          <li><a href="#">Baptism</a></li>
+          <li><a href="#">Membership</a></li>
+          <li><a href="#">Discipleship</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Serve</p>
+        <ul>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Missions</a></li>
+          <li><a href="#">Community Outreach</a></li>
+          <li><a href="#">Prayer Request</a></li>
+          <li><a href="#">Give</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Grace Baptist Dacula. All rights reserved.</p>
+      <p>Design: <span class="ph" style="background:transparent;border:none;padding:0;color:rgba(255,255,255,0.2);font-size:11px">[YOUR NAME / AGENCY]</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ─── -->
+<script>
+  // ── Nav scroll behavior ──
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── Mobile menu ──
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ──────────────────────────────────────────
+  // YOUTUBE — Live sermon feed
+  // Uses the public RSS feed (no API key needed)
+  // Channel: UCJoJOLxLC_5LtJ1MSISZhig (@GraceBaptistDacula)
+  // ──────────────────────────────────────────
+  const YT_CHANNEL_ID = 'UCJoJOLxLC_5LtJ1MSISZhig';
+  const RSS_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}&api_key=public&count=3`;
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function buildSermonCard(video, isFeatured) {
+    const videoId = video.link.split('v=')[1] || video.guid.split(':').pop();
+    const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+    const thumbHQ = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    const url = `https://www.youtube.com/watch?v=${videoId}`;
+    const date = formatDate(video.pubDate);
+    const title = video.title;
+
+    return `
+      <a href="${url}" target="_blank" rel="noopener" class="sermon-card" style="text-decoration:none;display:block;">
+        <div class="sermon-thumb" style="position:relative;overflow:hidden;">
+          <img
+            src="${isFeatured ? thumbHQ : thumb}"
+            alt="${title}"
+            loading="lazy"
+            style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;"
+            onerror="this.src='${thumb}'"
+          />
+          <div class="play-btn">
+            <div class="play-circle">
+              <svg width="${isFeatured ? 22 : 16}" height="${isFeatured ? 22 : 16}" fill="white" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="sermon-info">
+          <p class="sermon-series">Grace Baptist Dacula</p>
+          <h3 class="sermon-title" style="font-size:${isFeatured ? '20px' : '16px'};line-height:1.3;">${title}</h3>
+          <p class="sermon-meta">Pastor Kimbrough · ${date}</p>
+        </div>
+      </a>`;
+  }
+
+  async function loadSermons() {
+    try {
+      const res = await fetch(RSS_PROXY);
+      const data = await res.json();
+      if (!data.items || !data.items.length) throw new Error('No videos');
+
+      const grid = document.getElementById('sermon-grid');
+      grid.innerHTML = data.items.slice(0, 3).map((v, i) => buildSermonCard(v, i === 0)).join('');
+
+      // Re-observe new cards for reveal
+      grid.querySelectorAll('.sermon-card').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = `opacity 0.6s ease ${i * 0.12}s, transform 0.6s ease ${i * 0.12}s`;
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 100 + i * 120);
+      });
+    } catch (err) {
+      // Fallback: show a "Watch on YouTube" prompt
+      document.getElementById('sermon-grid').innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:48px 24px;color:rgba(255,255,255,0.5);">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" style="margin:0 auto 16px"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="rgba(255,255,255,0.4)"/></svg>
+          <p style="margin-bottom:20px;font-size:16px;">Watch all of Pastor Kimbrough's messages on YouTube.</p>
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="btn btn-outline">Watch on YouTube →</a>
+        </div>`;
+    }
+  }
+
+  loadSermons();
+
+  // ──────────────────────────────────────────
+  // CONNECT CARD — Formspree AJAX submission
+  // Replace the Formspree form ID with the real
+  // one from https://formspree.io once set up
+  // ──────────────────────────────────────────
+  const form = document.getElementById('connect-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.reset();
+          btn.style.display = 'none';
+          success.style.display = 'block';
+          error.style.display = 'none';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch {
+        btn.textContent = 'Send Connect Card →';
+        btn.disabled = false;
+        error.style.display = 'block';
+      }
+    });
+  }
+
+  // ── Connect layout responsive ──
+  function adjustConnectLayout() {
+    const main = document.querySelector('.connect-main');
+    if (!main) return;
+    if (window.innerWidth < 768) {
+      main.style.gridTemplateColumns = '1fr';
+    } else {
+      main.style.gridTemplateColumns = '1fr 1fr';
+    }
+  }
+  adjustConnectLayout();
+  window.addEventListener('resize', adjustConnectLayout);
+</script>
+</body>
+</html>
