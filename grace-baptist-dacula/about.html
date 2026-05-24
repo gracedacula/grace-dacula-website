@@ -31,7 +31,14 @@
       <li><a href="visit.html">Plan a Visit</a></li>
       <li><a href="sermons.html">Sermons</a></li>
       <li><a href="events.html">Events</a></li>
-      <li><a href="about.html">About</a></li>
+      <li class="has-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown">
+          <a href="about.html#about">About Us</a>
+          <a href="about.html#leadership">Leadership</a>
+          <a href="about.html#beliefs">Beliefs</a>
+        </div>
+      </li>
       <li><a href="give.html">Give</a></li>
     </ul>
     <a href="visit.html" class="nav-cta">Plan a Visit</a>
@@ -63,7 +70,7 @@
 </section>
 
 <!-- ─── WELCOME / STORY ─── -->
-<section class="welcome">
+<section class="welcome" id="about">
   <div class="container">
     <div class="welcome-visual reveal">
       <div class="welcome-img-frame">
@@ -94,7 +101,7 @@
 </section>
 
 <!-- ─── MEET OUR TEAM ─── -->
-<section style="background:var(--white);padding:88px 0;">
+<section id="leadership" style="background:var(--white);padding:88px 0;">
   <div class="container">
     <div style="text-align:center;margin-bottom:56px;" class="reveal">
       <p class="label">The People Behind the Ministry</p>
@@ -146,7 +153,7 @@
 </section>
 
 <!-- ─── BELIEFS ─── -->
-<section class="beliefs">
+<section class="beliefs" id="beliefs">
   <div class="beliefs-pattern"></div>
   <div class="container">
     <div class="beliefs-left reveal">

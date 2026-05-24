@@ -227,6 +227,54 @@ a  { text-decoration: none; color: inherit; }
 .nav-links a.active { color: var(--sage); }
 .nav.scrolled .nav-links a.active { color: var(--sage); }
 
+/* ── Nav dropdown ── */
+.nav-links li { position: relative; }
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: 6px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+  min-width: 160px;
+  /* padding-top creates a hover bridge so mouse can travel to the menu */
+  padding: 16px 0 6px;
+  margin-top: -8px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* delay hiding so mouse has time to reach the dropdown */
+  transition: opacity 0.15s ease 0.15s, visibility 0s 0.3s, transform 0.15s ease 0.15s;
+  z-index: 200;
+}
+.nav-links li:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.15s ease 0s, visibility 0s 0s, transform 0.15s ease 0s;
+}
+.nav-dropdown a {
+  display: block;
+  padding: 10px 18px;
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone) !important;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+.nav-dropdown a:hover {
+  background: var(--cream);
+  color: var(--near-black) !important;
+}
+.nav-dropdown a::after { display: none !important; }
+
 .nav-cta {
   font-family: var(--font-head);
   font-weight: 700;
