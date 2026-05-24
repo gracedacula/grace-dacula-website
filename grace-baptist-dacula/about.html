@@ -100,7 +100,7 @@
       <p class="label">The People Behind the Ministry</p>
       <h2 class="section-title">Meet Our <span>Team</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px;" class="reveal reveal-d1">
+    <div class="team-grid reveal reveal-d1">
 
       <!-- Wynne Kimbrough -->
       <div style="display:flex;flex-direction:column;">
@@ -157,54 +157,84 @@
     </div>
     <div class="beliefs-right reveal reveal-d2">
       <div class="belief-item">
-        <div class="belief-num">01</div>
-        <div class="belief-name">The Trinity</div>
-        <p class="belief-desc">We believe in one God in three persons: God the Father, Son, and Holy Spirit.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">01</span>
+          <span class="belief-name">The Trinity</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe in one God in three persons: God the Father, Son, and Holy Spirit.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">02</div>
-        <div class="belief-name">Scripture</div>
-        <p class="belief-desc">We believe the Bible to be inspired by God in the original manuscripts — the inerrant, infallible Word of God and the final authority for faith and practice.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">02</span>
+          <span class="belief-name">Scripture</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe the Bible to be inspired by God in the original manuscripts — the inerrant, infallible Word of God and the final authority for faith and practice.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">03</div>
-        <div class="belief-name">Creation &amp; Sin</div>
-        <p class="belief-desc">We believe God created the earth as revealed in Genesis, that Adam and Eve were made in His image, and that their willful sin left mankind totally unable to remedy his own lost condition.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">03</span>
+          <span class="belief-name">Creation &amp; Sin</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe God created the earth as revealed in Genesis, that Adam and Eve were made in His image, and that their willful sin left mankind totally unable to remedy his own lost condition.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">04</div>
-        <div class="belief-name">Redemption</div>
-        <p class="belief-desc">We believe the Lord Jesus Christ accomplished the Father's eternal purpose through His substitutionary death on the cross, verified by His literal, physical resurrection from the grave.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">04</span>
+          <span class="belief-name">Redemption</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe the Lord Jesus Christ accomplished the Father's eternal purpose through His substitutionary death on the cross, verified by His literal, physical resurrection from the grave.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">05</div>
-        <div class="belief-name">Salvation</div>
-        <p class="belief-desc">We believe salvation is the gift of God's righteousness, received by personal faith in Jesus Christ expressed in repentant confession of Him as Lord and Savior.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">05</span>
+          <span class="belief-name">Salvation</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe salvation is the gift of God's righteousness, received by personal faith in Jesus Christ expressed in repentant confession of Him as Lord and Savior.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">06</div>
-        <div class="belief-name">The Holy Spirit</div>
-        <p class="belief-desc">We believe the Holy Spirit convicts, guides believers into truth, and is the supernatural agent in regeneration — baptizing, indwelling, and sealing believers until the day of redemption.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">06</span>
+          <span class="belief-name">The Holy Spirit</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe the Holy Spirit convicts, guides believers into truth, and is the supernatural agent in regeneration — baptizing, indwelling, and sealing believers until the day of redemption.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">07</div>
-        <div class="belief-name">The Church</div>
-        <p class="belief-desc">We believe the local church is comprised of born-again believers commissioned to make disciples of all nations, baptizing them and teaching them to observe all that Christ commanded.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">07</span>
+          <span class="belief-name">The Church</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe the local church is comprised of born-again believers commissioned to make disciples of all nations, baptizing them and teaching them to observe all that Christ commanded.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">08</div>
-        <div class="belief-name">The Ordinances</div>
-        <p class="belief-desc">We believe in two ordinances for the church that testify of the completed work of Christ: baptism and communion.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">08</span>
+          <span class="belief-name">The Ordinances</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe in two ordinances for the church that testify of the completed work of Christ: baptism and communion.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">09</div>
-        <div class="belief-name">Christ's Return</div>
-        <p class="belief-desc">We believe in the premillennial, imminent return of the Lord Jesus Christ for the redeemed.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">09</span>
+          <span class="belief-name">Christ's Return</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe in the premillennial, imminent return of the Lord Jesus Christ for the redeemed.</p></div>
       </div>
       <div class="belief-item">
-        <div class="belief-num">10</div>
-        <div class="belief-name">Resurrection &amp; Eternity</div>
-        <p class="belief-desc">We believe in the resurrection of all men — the saved to eternal life in a literal heaven, and the unsaved to eternal judgment for rejecting Jesus Christ.</p>
+        <button class="belief-trigger" onclick="toggleBelief(this)" aria-expanded="false">
+          <span class="belief-num">10</span>
+          <span class="belief-name">Resurrection &amp; Eternity</span>
+          <svg class="belief-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="belief-body"><p class="belief-desc">We believe in the resurrection of all men — the saved to eternal life in a literal heaven, and the unsaved to eternal judgment for rejecting Jesus Christ.</p></div>
       </div>
     </div>
   </div>
@@ -219,6 +249,11 @@
           <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" style="height:36px;width:auto;display:block;" />
         </div>
         <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">We are a gospel-centered church on mission to make Jesus known.</p>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+          <a href="https://maps.app.goo.gl/2DaQqVV2UgXk5zZJA" target="_blank" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:flex-start;gap:8px;line-height:1.5;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" style="margin-top:2px;flex-shrink:0;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="currentColor" stroke-width="1.8"/></svg>2980 Old Peachtree Rd NE, Dacula, GA 30019</a>
+          <a href="tel:+16789850705" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>(678) 985-0705</a>
+          <a href="mailto:info@gracebaptistdacula.com" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>info@gracebaptistdacula.com</a>
+        </div>
         <div class="footer-socials">
           <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -269,5 +304,19 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script>
+  function toggleBelief(btn) {
+    const item = btn.closest('.belief-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.belief-item').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('.belief-trigger').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    // Open this one only if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+</script>
 </body>
 </html>

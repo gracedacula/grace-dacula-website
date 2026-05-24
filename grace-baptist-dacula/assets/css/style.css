@@ -652,6 +652,14 @@ a  { text-decoration: none; color: inherit; }
   margin: 0 auto 64px;
   display: flex; flex-direction: column; gap: 16px;
 }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+@media (max-width: 768px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
 .min-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -768,45 +776,77 @@ a  { text-decoration: none; color: inherit; }
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 80px;
-  align-items: center;
+  align-items: start;
 }
-.beliefs-left { display: flex; flex-direction: column; gap: 28px; }
+.beliefs-left {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: calc(var(--nav-h) + 40px);
+}
 .beliefs-left .section-title { color: var(--white); }
 .beliefs-left .body-text { color: rgba(255,255,255,0.5); }
 .beliefs-right {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 .belief-item {
-  background: rgba(255,255,255,0.04);
-  padding: 36px 32px;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: var(--transition);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.belief-item:hover { background: rgba(122,140,126,0.1); border-color: rgba(122,140,126,0.2); }
+.belief-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 4px;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+.belief-trigger:hover { background: rgba(122,140,126,0.06); }
 .belief-num {
   font-family: var(--font-head);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.15em;
   color: var(--sage);
-  margin-bottom: 12px;
+  flex-shrink: 0;
+  width: 24px;
 }
 .belief-name {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   text-transform: uppercase;
   color: var(--white);
   letter-spacing: 0.04em;
-  margin-bottom: 10px;
+  flex: 1;
+}
+.belief-chevron {
+  color: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.belief-item.open .belief-chevron { transform: rotate(180deg); color: var(--sage); }
+.belief-item.open .belief-name { color: var(--sage); }
+.belief-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.belief-item.open .belief-body {
+  max-height: 300px;
 }
 .belief-desc {
   font-size: 14px;
-  line-height: 1.65;
-  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.5);
   font-weight: 300;
+  padding: 0 4px 20px 40px;
 }
 
 /* ──────────────────────────────────────────
@@ -940,15 +980,15 @@ footer {
   :root { --nav-h: 64px; }
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
-  .hero-photo { display: none; }
+  .hero-photo { display: block; }
   .hero-content { max-width: 100%; }
   .welcome .container { grid-template-columns: 1fr; }
   .welcome-visual { order: -1; }
   .steps-grid { grid-template-columns: 1fr; }
   .sermon-grid { grid-template-columns: 1fr; }
   .sermon-grid .sermon-card:first-child { grid-column: span 1; }
-  .min-grid { grid-template-columns: 1fr 1fr; }
-  .beliefs-right { grid-template-columns: 1fr; }
+  .min-grid { grid-template-columns: 1fr; }
+  .beliefs-left { position: static; }
   .connect-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
