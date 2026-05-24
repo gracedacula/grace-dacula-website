@@ -87,6 +87,17 @@
       <div class="service-item-text">
         <strong>9:30 AM</strong>
         Sunday Worship + Children's Worship
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sunday+Worship+%E2%80%94+Grace+Baptist+Dacula&details=Sunday+Worship+%2B+Children%27s+Worship&location=2980+Old+Peachtree+Rd+NE%2C+Dacula%2C+GA+30019&dates=20260524T133000Z%2F20260524T150000Z&recur=RRULE%3AFREQ%3DWEEKLY%3BBYDAY%3DSU"
+            target="_blank"
+            style="display:block;padding:8px 14px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);border-radius:4px;color:white;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s ease;"
+            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.15)'">Google Cal</a>
+          <button onclick="downloadICS()"
+            style="display:block;padding:8px 14px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);border-radius:4px;color:white;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s ease;"
+            onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.15)'">Apple / iCal</button>
+        </div>
       </div>
     </div>
     <div class="service-divider"></div>
@@ -100,6 +111,12 @@
       <div class="service-item-text">
         <strong>7:00 PM (Zoom)</strong>
         Wednesday Bible Study
+        <a href="mailto:info@gracebaptistdacula.com?subject=Zoom%20Link%20Request&body=Hi%2C%20I%27d%20love%20to%20join%20the%20Wednesday%20Bible%20Study%20on%20Zoom.%20Could%20you%20send%20me%20the%20link%3F%20Thank%20you!"
+          style="display:block;width:fit-content;margin:14px auto 0;padding:8px 18px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);border-radius:4px;color:white;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s ease;"
+          onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+          Get Zoom Link →
+        </a>
       </div>
     </div>
     <div class="service-divider"></div>
@@ -113,6 +130,14 @@
       <div class="service-item-text">
         <strong>2980 Old Peachtree Rd NE</strong>
         Dacula, GA 30019
+        <a href="https://maps.apple.com/?q=Grace+Baptist+Church+Dacula&address=2980+Old+Peachtree+Rd+NE,+Dacula,+GA+30019"
+          onclick="if(!/iPhone|iPad|iPod|Mac/.test(navigator.userAgent)){event.preventDefault();window.open('https://www.google.com/maps/dir/?api=1&destination=2980+Old+Peachtree+Rd+NE,+Dacula,+GA+30019','_blank');}"
+          target="_blank"
+          style="display:block;width:fit-content;margin:14px auto 0;padding:8px 18px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);border-radius:4px;color:white;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s ease;"
+          onmouseover="this.style.background='rgba(255,255,255,0.25)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+          Get Directions →
+        </a>
       </div>
     </div>
   </div>
@@ -259,6 +284,30 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script>
+  function downloadICS() {
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Grace Baptist Dacula//EN',
+      'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'SUMMARY:Sunday Worship — Grace Baptist Dacula',
+      'DESCRIPTION:Sunday Worship + Children\'s Worship',
+      'LOCATION:2980 Old Peachtree Rd NE\\, Dacula\\, GA 30019',
+      'DTSTART;TZID=America/New_York:20260524T093000',
+      'DTEND;TZID=America/New_York:20260524T110000',
+      'RRULE:FREQ=WEEKLY;BYDAY=SU',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics], { type: 'text/calendar' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'grace-sunday-worship.ics';
+    a.click();
+  }
+</script>
 <script>
   // ── YouTube sermon preview (3 videos) ──
   const YT_CHANNEL_ID = 'UCJoJOLxLC_5LtJ1MSISZhig';
