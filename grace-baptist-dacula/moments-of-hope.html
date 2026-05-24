@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Moments of Hope | Grace Baptist Dacula</title>
+<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+<link rel="icon" type="image/png" href="assets/images/icon.png" />
+<link rel="apple-touch-icon" href="assets/images/icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  /* ── Moments of Hope hero ── */
+  .moh-hero {
+    background: var(--ink);
+    padding: calc(var(--nav-h) + 80px) 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .moh-hero-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image: radial-gradient(circle at 1px 1px, var(--sage) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  .moh-hero-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(122,140,126,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .moh-hero .container {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .moh-cover {
+    width: 280px;
+    height: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+  }
+  .moh-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .moh-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .moh-type {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .moh-type::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--sage);
+  }
+  .moh-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(40px, 5vw, 64px);
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+  }
+  .moh-host {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+  .moh-desc {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 520px;
+  }
+  .moh-subscribe {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .moh-sub-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .moh-sub-btn:hover {
+    background: rgba(122,140,126,0.2);
+    border-color: var(--sage);
+    color: var(--white);
+  }
+
+  /* ── Episodes section ── */
+  .episodes-section {
+    padding: 80px 0 120px;
+    background: var(--white);
+  }
+  .episodes-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--cream);
+  }
+  .episodes-count {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--stone);
+    font-weight: 300;
+  }
+  .episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .episode-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.2s ease;
+  }
+  .episode-item:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
+  .episode-num {
+    font-family: var(--font-head);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--sand);
+    text-align: center;
+    line-height: 1;
+  }
+  .episode-info { display: flex; flex-direction: column; gap: 5px; }
+  .episode-date {
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .episode-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: var(--near-black);
+    line-height: 1.2;
+  }
+  .episode-duration {
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 300;
+  }
+  .episode-play-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sage);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+  }
+  .episode-play-btn:hover {
+    background: #677a6b;
+    transform: scale(1.08);
+  }
+  .episode-player {
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    display: none;
+  }
+  .episode-player.open { display: block; }
+  .episode-player audio {
+    width: 100%;
+    accent-color: var(--sage);
+  }
+
+  /* ── Coming soon / loading states ── */
+  .episodes-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    gap: 16px;
+    text-align: center;
+  }
+  .episodes-loading-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .episodes-soon-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: var(--near-black);
+    letter-spacing: 0.02em;
+  }
+  .episodes-soon-sub {
+    font-size: 16px;
+    color: var(--stone);
+    font-weight: 300;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .moh-hero .container {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .moh-cover {
+      width: 200px;
+      height: 200px;
+    }
+    .episode-item {
+      grid-template-columns: 40px 1fr auto;
+      gap: 14px;
+    }
+    .episode-num { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-svg-group">
+        <svg viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-logo-text">Grace Baptist Dacula</span>
+      </span>
+      <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" class="nav-logo-white" />
+      <img src="assets/images/logo.webp" alt="Grace Baptist Dacula" class="nav-logo-real" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="visit.html">Plan a Visit</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li class="has-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown">
+          <a href="about.html#about">About Us</a>
+          <a href="about.html#leadership">Leadership</a>
+          <a href="about.html#beliefs">Beliefs</a>
+        </div>
+      </li>
+      <li><a href="resources.html" class="active">Resources</a></li>
+      <li><a href="give.html">Give</a></li>
+    </ul>
+    <a href="visit.html" class="nav-cta">Plan a Visit</a>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="visit.html" onclick="closeMenu()">Plan a Visit</a>
+  <a href="sermons.html" onclick="closeMenu()">Sermons</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="resources.html" onclick="closeMenu()">Resources</a>
+  <a href="give.html" onclick="closeMenu()">Give</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="moh-hero">
+  <div class="moh-hero-bg"></div>
+  <div class="moh-hero-glow"></div>
+  <div class="container">
+    <div class="moh-cover reveal in">
+      <img src="assets/images/moments_of_hope_cover.png" alt="Moments of Hope Podcast" />
+    </div>
+    <div class="moh-info reveal in reveal-d1">
+      <span class="moh-type">Podcast</span>
+      <h1 class="moh-title">Moments<br/>of Hope</h1>
+      <p class="moh-host">with Marty Von · Counseling Pastor</p>
+      <p class="moh-desc">Short, encouraging reflections from God's Word. Marty Von, counseling pastor at Grace Baptist Dacula, brings hope and truth for everyday life.</p>
+      <div class="moh-subscribe">
+        <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="moh-sub-btn">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          RSS Feed
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EPISODES ─── -->
+<section class="episodes-section">
+  <div class="container" style="max-width:860px;">
+    <div class="episodes-header">
+      <div>
+        <p class="label">All Episodes</p>
+        <h2 class="section-title" style="font-size:clamp(28px,3vw,38px);margin-top:6px;">Moments of Hope</h2>
+      </div>
+      <span class="episodes-count" id="episodes-count"></span>
+    </div>
+    <div id="episode-list" class="episode-list">
+      <!-- Loading state -->
+      <div class="episodes-loading" id="loading-state">
+        <div class="episodes-loading-icon">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
+            <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p style="font-size:14px;color:var(--stone);">Loading episodes…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" style="height:36px;width:auto;display:block;" />
+        </div>
+        <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">We are a gospel-centered church on mission to make Jesus known.</p>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+          <a href="https://maps.app.goo.gl/2DaQqVV2UgXk5zZJA" target="_blank" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:flex-start;gap:8px;line-height:1.5;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" style="margin-top:2px;flex-shrink:0;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="currentColor" stroke-width="1.8"/></svg>2980 Old Peachtree Rd NE, Dacula, GA 30019</a>
+          <a href="tel:+16789850705" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>(678) 985-0705</a>
+          <a href="mailto:info@gracebaptistdacula.com" style="color:rgba(255,255,255,0.4);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:8px;"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>info@gracebaptistdacula.com</a>
+        </div>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="social-btn" title="YouTube">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+          <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="social-btn" title="Podcast RSS">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit</p>
+        <ul>
+          <li><a href="visit.html">Plan a Visit</a></li>
+          <li><a href="visit.html">Service Times</a></li>
+          <li><a href="visit.html">Directions &amp; Parking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Grow</p>
+        <ul>
+          <li><a href="sermons.html">Sermon Archive</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="about.html">Baptism</a></li>
+          <li><a href="about.html">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Serve</p>
+        <ul>
+          <li><a href="visit.html">Prayer Request</a></li>
+          <li><a href="give.html">Give</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Grace Baptist Dacula. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  const RSS_URL = 'https://feeds.buzzsprout.com/2620344.rss';
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function formatDuration(secs) {
+    if (!secs) return '';
+    const s = parseInt(secs, 10);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+    return `${m}:${String(sec).padStart(2,'0')}`;
+  }
+
+  function togglePlayer(id) {
+    const player = document.getElementById('player-' + id);
+    if (!player) return;
+    const isOpen = player.classList.contains('open');
+    // Close all other players
+    document.querySelectorAll('.episode-player.open').forEach(p => {
+      p.classList.remove('open');
+      const audio = p.querySelector('audio');
+      if (audio) audio.pause();
+      // Reset play button
+      const btn = document.getElementById('playbtn-' + p.dataset.id);
+      if (btn) btn.innerHTML = playIcon();
+    });
+    if (!isOpen) {
+      player.classList.add('open');
+      const audio = player.querySelector('audio');
+      if (audio) audio.play();
+      const btn = document.getElementById('playbtn-' + id);
+      if (btn) btn.innerHTML = pauseIcon();
+    }
+  }
+
+  function playIcon() {
+    return `<svg width="16" height="16" fill="white" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
+  }
+
+  function pauseIcon() {
+    return `<svg width="16" height="16" fill="white" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>`;
+  }
+
+  function buildEpisodeItem(ep, index) {
+    const id = 'ep-' + index;
+    return `
+      <div class="episode-item" id="${id}">
+        <div class="episode-num">${ep.episodeNum || (index + 1)}</div>
+        <div class="episode-info">
+          <span class="episode-date">${formatDate(ep.pubDate)}</span>
+          <h3 class="episode-title">${ep.title}</h3>
+          ${ep.duration ? `<span class="episode-duration">${formatDuration(ep.duration)}</span>` : ''}
+        </div>
+        ${ep.audioUrl ? `
+          <button class="episode-play-btn" id="playbtn-${index}" onclick="togglePlayer(${index})" title="Play episode">
+            ${playIcon()}
+          </button>
+        ` : ''}
+        ${ep.audioUrl ? `
+          <div class="episode-player" id="player-${index}" data-id="${index}">
+            <audio controls preload="none" style="width:100%;">
+              <source src="${ep.audioUrl}" type="audio/mpeg" />
+              Your browser does not support audio playback.
+            </audio>
+          </div>
+        ` : ''}
+      </div>`;
+  }
+
+  async function fetchRSS(url) {
+    const proxies = [
+      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+    ];
+    for (const proxy of proxies) {
+      try {
+        const res = await fetch(proxy, { signal: AbortSignal.timeout(10000) });
+        if (!res.ok) continue;
+        const text = await res.text();
+        if (text.trim().startsWith('{')) {
+          const json = JSON.parse(text);
+          return json.contents || json.data || '';
+        }
+        return text;
+      } catch { /* try next */ }
+    }
+    throw new Error('Could not load feed');
+  }
+
+  function parseRSS(xmlStr) {
+    const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
+    const items = Array.from(doc.querySelectorAll('item'));
+    return items.map((item, i) => {
+      const enclosure = item.querySelector('enclosure');
+      const duration = item.querySelector('duration')?.textContent?.trim() || '';
+      const epNumEl = item.querySelector('episode');
+      return {
+        title: item.querySelector('title')?.textContent?.trim() || 'Untitled',
+        pubDate: item.querySelector('pubDate')?.textContent?.trim() || '',
+        audioUrl: enclosure?.getAttribute('url') || '',
+        duration,
+        episodeNum: epNumEl?.textContent?.trim() || ''
+      };
+    });
+  }
+
+  async function loadEpisodes() {
+    const list = document.getElementById('episode-list');
+    const loadingState = document.getElementById('loading-state');
+    const countEl = document.getElementById('episodes-count');
+
+    try {
+      const xml = await fetchRSS(RSS_URL);
+      const episodes = parseRSS(xml);
+
+      list.innerHTML = '';
+
+      if (!episodes.length) {
+        list.innerHTML = `
+          <div class="episodes-loading">
+            <div class="episodes-loading-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
+                <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="episodes-soon-title">Episodes Coming Soon</p>
+            <p class="episodes-soon-sub">Marty Von's Moments of Hope podcast is on its way. Check back soon for short, encouraging reflections from God's Word.</p>
+            <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="btn btn-dark" style="margin-top:16px;">Subscribe via RSS →</a>
+          </div>`;
+        return;
+      }
+
+      countEl.textContent = `${episodes.length} episode${episodes.length !== 1 ? 's' : ''}`;
+      list.innerHTML = episodes.map((ep, i) => buildEpisodeItem(ep, i)).join('');
+
+      // Animate in
+      list.querySelectorAll('.episode-item').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transition = `opacity 0.4s ease ${i * 0.06}s`;
+        setTimeout(() => { el.style.opacity = '1'; }, 50 + i * 60);
+      });
+
+    } catch (err) {
+      list.innerHTML = `
+        <div class="episodes-loading">
+          <div class="episodes-loading-icon">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
+              <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="episodes-soon-title">Episodes Coming Soon</p>
+          <p class="episodes-soon-sub">Marty Von's Moments of Hope podcast is on its way. Check back soon for short, encouraging reflections from God's Word.</p>
+          <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="btn btn-dark" style="margin-top:16px;">Subscribe via RSS →</a>
+        </div>`;
+    }
+  }
+
+  loadEpisodes();
+</script>
+</body>
+</html>
