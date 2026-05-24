@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plan a Visit | Grace Baptist Dacula</title>
+<link rel="icon" type="image/webp" href="assets/images/icon.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-svg-group">
+        <svg viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-logo-text">Grace Baptist Dacula</span>
+      </span>
+      <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" class="nav-logo-white" />
+      <img src="assets/images/logo.webp" alt="Grace Baptist Dacula" class="nav-logo-real" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="visit.html">Plan a Visit</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="give.html">Give</a></li>
+    </ul>
+    <a href="visit.html" class="nav-cta">Plan a Visit</a>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="visit.html" onclick="closeMenu()">Plan a Visit</a>
+  <a href="sermons.html" onclick="closeMenu()">Sermons</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="give.html" onclick="closeMenu()">Give</a>
+</div>
+
+<!-- ─── PAGE HEADER ─── -->
+<section class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="container">
+    <div class="page-header-content">
+      <p class="label">New Here?</p>
+      <h1 class="section-title">Plan a <span>Visit</span></h1>
+      <p class="body-text">We know showing up somewhere new can feel awkward — here's everything you need to know before Sunday.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT TO EXPECT ─── -->
+<section class="visit">
+  <div class="container">
+    <div class="steps-grid">
+      <div class="step-card reveal reveal-d1">
+        <div class="step-num">01</div>
+        <div class="step-title">Arrival &amp; Parking</div>
+        <p class="body-text">We're located at 2980 Old Peachtree Rd NE, Dacula, GA 30019. Greeters will welcome you at the door and help you find your way.</p>
+      </div>
+      <div class="step-card reveal reveal-d2">
+        <div class="step-num">02</div>
+        <div class="step-title">The Worship Service</div>
+        <p class="body-text">Clear, expositional preaching of God's Word is the heartbeat of Grace Baptist. Pastor Kimbrough leads our Sunday service with vibrant singing and Bible-centered teaching. Children's Worship runs at the same time for younger ones.</p>
+      </div>
+      <div class="step-card reveal reveal-d3">
+        <div class="step-num">03</div>
+        <div class="step-title">Grow &amp; Connect</div>
+        <p class="body-text">Beyond Sundays, join our Wednesday evening Zoom Bible study at 7:00 PM, or the Ladies Bible Study every Friday morning at 10:00 AM at the church.</p>
+      </div>
+    </div>
+
+    <!-- Service times detail -->
+    <div style="margin-top:64px;background:var(--white);border-radius:8px;padding:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;" class="reveal">
+      <div style="text-align:center;padding:24px;border-right:1px solid var(--cream);">
+        <div style="width:48px;height:48px;background:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7A8C7E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#7A8C7E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="label" style="margin-bottom:8px;">Sunday Morning</p>
+        <p style="font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--near-black);">9:30 AM</p>
+        <p class="body-text" style="font-size:14px;margin-top:4px;">Worship &amp; Children's Ministry</p>
+      </div>
+      <div style="text-align:center;padding:24px;border-right:1px solid var(--cream);">
+        <div style="width:48px;height:48px;background:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7A8C7E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#7A8C7E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="label" style="margin-bottom:8px;">Wednesday Evening</p>
+        <p style="font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--near-black);">7:00 PM</p>
+        <p class="body-text" style="font-size:14px;margin-top:4px;">Zoom Bible Study</p>
+      </div>
+      <div style="text-align:center;padding:24px;">
+        <div style="width:48px;height:48px;background:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7A8C7E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#7A8C7E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <p class="label" style="margin-bottom:8px;">Friday Morning</p>
+        <p style="font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--near-black);">10:00 AM</p>
+        <p class="body-text" style="font-size:14px;margin-top:4px;">Ladies Bible Study</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONNECT / CONTACT ─── -->
+<section class="connect">
+  <div class="container">
+    <div class="connect-header reveal">
+      <p class="label">Stay Connected</p>
+      <h2 class="section-title">We'd Love to <span>Hear from You</span></h2>
+      <p class="body-text">Whether you're visiting for the first time, have a prayer request, or just want to learn more — fill out a connect card and we'll be in touch.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="connect-main reveal">
+
+      <!-- ── CONNECT CARD FORM ── -->
+      <div>
+        <h3 style="font-family:var(--font-head);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--near-black);margin-bottom:28px;">Connect Card</h3>
+        <form
+          action="https://formspree.io/f/gracedacula"
+          method="POST"
+          id="connect-form"
+          style="display:flex;flex-direction:column;gap:16px;">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">First Name *</label>
+              <input type="text" name="first_name" required placeholder="Grace"
+                style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+                onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Last Name *</label>
+              <input type="text" name="last_name" required placeholder="Baptist"
+                style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+                onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Email Address *</label>
+            <input type="email" name="email" required placeholder="you@example.com"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Phone Number</label>
+            <input type="tel" name="phone" placeholder="(678) 000-0000"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"/>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:8px;">I am a…</label>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="First-time visitor" style="accent-color:var(--sage)"/> First-time visitor
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="Regular attendee" style="accent-color:var(--sage)"/> Regular attendee
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--stone);cursor:pointer;">
+                <input type="radio" name="visitor_type" value="Member" style="accent-color:var(--sage)"/> Member
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:6px;">Message or Prayer Request</label>
+            <textarea name="message" rows="4" placeholder="Share anything on your heart…"
+              style="width:100%;padding:14px 16px;border:1.5px solid var(--sand);border-radius:4px;font-family:var(--font-body);font-size:15px;color:var(--near-black);background:var(--white);transition:border-color 0.2s;outline:none;resize:vertical;"
+              onfocus="this.style.borderColor='var(--sage)'" onblur="this.style.borderColor='var(--sand)'"></textarea>
+          </div>
+
+          <input type="text" name="_gotcha" style="display:none"/>
+          <input type="hidden" name="_subject" value="New Connect Card — Grace Baptist Dacula"/>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;" id="submit-btn">
+            Send Connect Card →
+          </button>
+          <p id="form-success" style="display:none;color:var(--sage);font-size:14px;text-align:center;font-weight:500;">
+            ✓ Thanks! We'll be in touch soon.
+          </p>
+          <p id="form-error" style="display:none;color:#b83131;font-size:14px;text-align:center;">
+            Something went wrong. Please email us at <a href="mailto:info@gracebaptistdacula.com" style="color:#b83131;">info@gracebaptistdacula.com</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- ── CONTACT INFO + MAP ── -->
+      <div style="display:flex;flex-direction:column;gap:32px;">
+        <div>
+          <h3 style="font-family:var(--font-head);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--near-black);margin-bottom:24px;">Find Us</h3>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#7A8C7E" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#7A8C7E" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Address</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.5;">2980 Old Peachtree Rd NE<br/>Dacula, GA 30019</p>
+                <a href="https://maps.app.goo.gl/2DaQqVV2UgXk5zZJA" target="_blank" style="font-size:13px;color:var(--sage);font-weight:600;margin-top:4px;display:inline-block;">Get Directions →</a>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7A8C7E" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#7A8C7E" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Service Times</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.7;">Sunday Worship &amp; Children's — 9:30 AM<br/>Wednesday Bible Study — 7:00 PM (Zoom)<br/>Ladies Bible Study — Fri 10:00 AM</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:4px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.36 12a19.79 19.79 0 01-3.07-8.67 2 2 0 012-2.18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="#7A8C7E" stroke-width="2"/></svg>
+              </div>
+              <div>
+                <p style="font-family:var(--font-head);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--sage);margin-bottom:4px;">Phone &amp; Email</p>
+                <p style="font-size:15px;color:var(--near-black);line-height:1.7;"><a href="tel:+16789850705" style="color:var(--near-black);">(678) 985-0705</a><br/><a href="mailto:info@gracebaptistdacula.com" style="color:var(--sage);">info@gracebaptistdacula.com</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:8px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.3480642377713!2d-83.92825602428537!3d34.00927557317321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5eaaeb4380005%3A0x2a6408724ffe641a!2s2980%20Old%20Peachtree%20Rd%20NE%2C%20Dacula%2C%20GA%2030019%2C%20USA!5e0!3m2!1sen!2sph!4v1773737784215!5m2!1sen!2sph"
+            width="100%" height="260"
+            style="border:0;display:block;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Grace Baptist Dacula location map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" style="height:36px;width:auto;display:block;" />
+        </div>
+        <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">People loving other imperfect people the way Christ Jesus loves us.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="social-btn" title="YouTube">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Podcast">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit</p>
+        <ul>
+          <li><a href="visit.html">Plan a Visit</a></li>
+          <li><a href="visit.html">Service Times</a></li>
+          <li><a href="visit.html">Directions &amp; Parking</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Grow</p>
+        <ul>
+          <li><a href="sermons.html">Sermon Archive</a></li>
+          <li><a href="visit.html">Bible Studies</a></li>
+          <li><a href="about.html">Baptism</a></li>
+          <li><a href="about.html">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Serve</p>
+        <ul>
+          
+          
+          <li><a href="visit.html">Prayer Request</a></li>
+          <li><a href="give.html">Give</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Grace Baptist Dacula. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  const form = document.getElementById('connect-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          btn.style.display = 'none';
+          success.style.display = 'block';
+          error.style.display = 'none';
+        } else { throw new Error('Server error'); }
+      } catch {
+        btn.textContent = 'Send Connect Card →';
+        btn.disabled = false;
+        error.style.display = 'block';
+      }
+    });
+  }
+
+  function adjustConnectLayout() {
+    const main = document.querySelector('.connect-main');
+    if (!main) return;
+    main.style.gridTemplateColumns = window.innerWidth < 768 ? '1fr' : '1fr 1fr';
+  }
+  adjustConnectLayout();
+  window.addEventListener('resize', adjustConnectLayout);
+</script>
+</body>
+</html>

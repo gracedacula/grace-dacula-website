@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About | Grace Baptist Dacula</title>
+<link rel="icon" type="image/webp" href="assets/images/icon.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-svg-group">
+        <svg viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-logo-text">Grace Baptist Dacula</span>
+      </span>
+      <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" class="nav-logo-white" />
+      <img src="assets/images/logo.webp" alt="Grace Baptist Dacula" class="nav-logo-real" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="visit.html">Plan a Visit</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="give.html">Give</a></li>
+    </ul>
+    <a href="visit.html" class="nav-cta">Plan a Visit</a>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="visit.html" onclick="closeMenu()">Plan a Visit</a>
+  <a href="sermons.html" onclick="closeMenu()">Sermons</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="give.html" onclick="closeMenu()">Give</a>
+</div>
+
+<!-- ─── PAGE HEADER ─── -->
+<section class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="container">
+    <div class="page-header-content">
+      <p class="label">Who We Are</p>
+      <h1 class="section-title">About <span>Grace</span></h1>
+      <p class="body-text">A community of imperfect people loving one another the way Christ loves us — since 2000.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WELCOME / STORY ─── -->
+<section class="welcome">
+  <div class="container">
+    <div class="welcome-visual reveal">
+      <div class="welcome-img-frame">
+        <img src="assets/images/church-birds-eye.webp" alt="Grace Baptist Church Dacula"
+          style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;display:block;border-radius:4px;" />
+      </div>
+      <div class="welcome-accent"></div>
+      <div class="welcome-badge">Est. 2000</div>
+    </div>
+    <div class="welcome-text reveal reveal-d2">
+      <p class="label">Our Story</p>
+      <h2 class="section-title">A Church for<br/><span>Every Person</span></h2>
+      <blockquote class="welcome-quote">
+        Clear, expositional preaching of the Word of God is the heartbeat of Grace Baptist Church — and so is the community that gathers around it.
+      </blockquote>
+      <p class="body-text">
+        Grace Dacula is a story of God's varied grace. Since our beginning in the year 2000, our story at Grace Baptist Church of Dacula is a reminder that God's grace is sufficient for all.
+      </p>
+      <p class="body-text">
+        We are all different — Southerners, Northerners, immigrants, Native Georgians. We speak many languages and come from many walks of life. But we have one thing in common: a desire to know and love God, and to serve Him with all our heart.
+      </p>
+      <p class="body-text">
+        We enjoy being together. Our fellowship is sweet. The story of Grace Baptist is a story of a wonderful family fellowship — people loving other imperfect people the way Christ Jesus loves us. We would love for you to visit and we hope that our church family might become yours!
+      </p>
+      <a href="visit.html" class="btn btn-dark" style="margin-top:8px">Plan a Visit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MEET OUR TEAM ─── -->
+<section style="background:var(--white);padding:88px 0;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;" class="reveal">
+      <p class="label">The People Behind the Ministry</p>
+      <h2 class="section-title">Meet Our <span>Team</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:36px;" class="reveal reveal-d1">
+
+      <!-- Wynne Kimbrough -->
+      <div style="display:flex;flex-direction:column;">
+        <div style="overflow:hidden;border-radius:6px;margin-bottom:24px;">
+          <img src="assets/images/wynne-vickie.webp" alt="Dr. Wynne Kimbrough"
+            style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease;"
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <h3 style="font-family:var(--font-head);font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--near-black);margin-bottom:8px;">Dr. Wynne Kimbrough</h3>
+        <p class="body-text" style="font-size:15px;margin-bottom:20px;flex:1;">Wynne is our lead pastor and shepherd of Grace Dacula. He has served the church faithfully since its founding, bringing expositional preaching and a heart for discipleship.</p>
+        <a href="wynne-kimbrough.html" class="btn btn-dark" style="align-self:flex-start;font-size:13px;padding:10px 22px;">Wynne's Bio →</a>
+      </div>
+
+      <!-- Jason Fitch -->
+      <div style="display:flex;flex-direction:column;">
+        <div style="overflow:hidden;border-radius:6px;margin-bottom:24px;">
+          <img src="assets/images/Fitch-Family.webp" alt="Jason Fitch"
+            style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease;"
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <h3 style="font-family:var(--font-head);font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--near-black);margin-bottom:8px;">Jason Fitch</h3>
+        <p class="body-text" style="font-size:15px;margin-bottom:20px;flex:1;">Jason is our Associate Pastor responsible for worship and children's &amp; young adults ministries. He and his family are a vital part of the Grace community.</p>
+        <a href="jason-fitch.html" class="btn btn-dark" style="align-self:flex-start;font-size:13px;padding:10px 22px;">Jason's Bio →</a>
+      </div>
+
+      <!-- Marty Von -->
+      <div style="display:flex;flex-direction:column;">
+        <div style="overflow:hidden;border-radius:6px;margin-bottom:24px;">
+          <img src="assets/images/Marty-Von.webp" alt="Dr. Marty Von"
+            style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top;display:block;transition:transform 0.4s ease;"
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <h3 style="font-family:var(--font-head);font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--near-black);margin-bottom:8px;">Dr. Marty Von</h3>
+        <p class="body-text" style="font-size:15px;margin-bottom:20px;flex:1;">Marty is a counseling pastor supported by Grace Dacula and a ministry partner through his ChurchCare program. He brings compassionate care to our congregation.</p>
+        <a href="marty-von.html" class="btn btn-dark" style="align-self:flex-start;font-size:13px;padding:10px 22px;">Marty's Bio →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── BELIEFS ─── -->
+<section class="beliefs">
+  <div class="beliefs-pattern"></div>
+  <div class="container">
+    <div class="beliefs-left reveal">
+      <p class="label">What We Believe</p>
+      <h2 class="section-title" style="color:white">Rooted in <span>Scripture</span></h2>
+      <p class="body-text">We hold to the historic Baptist faith and affirm the authority of Scripture in all matters of faith and practice. These are the doctrines that anchor our worship, our community, and our mission.</p>
+      <a href="#" class="btn btn-outline" style="margin-top:8px; border-color: var(--sage); color: var(--sage)">Full Statement of Faith →</a>
+    </div>
+    <div class="beliefs-right reveal reveal-d2">
+      <div class="belief-item">
+        <div class="belief-num">01</div>
+        <div class="belief-name">The Trinity</div>
+        <p class="belief-desc">We believe in one God in three persons: God the Father, Son, and Holy Spirit.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">02</div>
+        <div class="belief-name">Scripture</div>
+        <p class="belief-desc">We believe the Bible to be inspired by God in the original manuscripts — the inerrant, infallible Word of God and the final authority for faith and practice.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">03</div>
+        <div class="belief-name">Creation &amp; Sin</div>
+        <p class="belief-desc">We believe God created the earth as revealed in Genesis, that Adam and Eve were made in His image, and that their willful sin left mankind totally unable to remedy his own lost condition.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">04</div>
+        <div class="belief-name">Redemption</div>
+        <p class="belief-desc">We believe the Lord Jesus Christ accomplished the Father's eternal purpose through His substitutionary death on the cross, verified by His literal, physical resurrection from the grave.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">05</div>
+        <div class="belief-name">Salvation</div>
+        <p class="belief-desc">We believe salvation is the gift of God's righteousness, received by personal faith in Jesus Christ expressed in repentant confession of Him as Lord and Savior.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">06</div>
+        <div class="belief-name">The Holy Spirit</div>
+        <p class="belief-desc">We believe the Holy Spirit convicts, guides believers into truth, and is the supernatural agent in regeneration — baptizing, indwelling, and sealing believers until the day of redemption.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">07</div>
+        <div class="belief-name">The Church</div>
+        <p class="belief-desc">We believe the local church is comprised of born-again believers commissioned to make disciples of all nations, baptizing them and teaching them to observe all that Christ commanded.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">08</div>
+        <div class="belief-name">The Ordinances</div>
+        <p class="belief-desc">We believe in two ordinances for the church that testify of the completed work of Christ: baptism and communion.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">09</div>
+        <div class="belief-name">Christ's Return</div>
+        <p class="belief-desc">We believe in the premillennial, imminent return of the Lord Jesus Christ for the redeemed.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-num">10</div>
+        <div class="belief-name">Resurrection &amp; Eternity</div>
+        <p class="belief-desc">We believe in the resurrection of all men — the saved to eternal life in a literal heaven, and the unsaved to eternal judgment for rejecting Jesus Christ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" style="height:36px;width:auto;display:block;" />
+        </div>
+        <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">People loving other imperfect people the way Christ Jesus loves us.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="social-btn" title="YouTube">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Podcast">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit</p>
+        <ul>
+          <li><a href="visit.html">Plan a Visit</a></li>
+          <li><a href="visit.html">Service Times</a></li>
+          <li><a href="visit.html">Directions &amp; Parking</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Grow</p>
+        <ul>
+          <li><a href="sermons.html">Sermon Archive</a></li>
+          <li><a href="visit.html">Bible Studies</a></li>
+          <li><a href="about.html">Baptism</a></li>
+          <li><a href="about.html">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Serve</p>
+        <ul>
+          
+          
+          <li><a href="visit.html">Prayer Request</a></li>
+          <li><a href="give.html">Give</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Grace Baptist Dacula. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

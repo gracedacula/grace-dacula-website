@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ministries | Grace Baptist Dacula</title>
+<link rel="icon" type="image/webp" href="assets/images/icon.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="main-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-svg-group">
+        <svg viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4 H34 V44 L19 35 L4 44 Z" stroke="#7A8C7E" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <line x1="19" y1="12" x2="19" y2="28" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="12" y1="19" x2="26" y2="19" stroke="#7A8C7E" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-logo-text">Grace Baptist Dacula</span>
+      </span>
+      <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" class="nav-logo-white" />
+      <img src="assets/images/logo.webp" alt="Grace Baptist Dacula" class="nav-logo-real" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="visit.html">Plan a Visit</a></li>
+      <li><a href="sermons.html">Sermons</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="give.html">Give</a></li>
+    </ul>
+    <a href="visit.html" class="nav-cta">Plan a Visit</a>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="visit.html" onclick="closeMenu()">Plan a Visit</a>
+  <a href="sermons.html" onclick="closeMenu()">Sermons</a>
+  <a href="events.html" onclick="closeMenu()">Events</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="give.html" onclick="closeMenu()">Give</a>
+</div>
+
+<!-- ─── PAGE HEADER ─── -->
+<section class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="container">
+    <div class="page-header-content">
+      <p class="label">Get Involved</p>
+      <h1 class="section-title">Ministries &amp; <span>Community</span></h1>
+      <p class="body-text">There's a place for you here — no matter your age, stage, or story.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MINISTRY CARDS ─── -->
+<section class="ministries" style="padding-top:72px;">
+  <div class="container">
+    <div class="ministries-header reveal">
+      <p class="label">Ways to Connect</p>
+      <h2 class="section-title">Find Your <span>Place</span></h2>
+      <p class="body-text">Each ministry is a way to grow deeper in faith and build lasting relationships with your church family.</p>
+    </div>
+  </div>
+  <div class="min-grid">
+    <div class="min-card reveal reveal-d1">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="9" cy="7" r="4" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 1<br/>e.g. Kids]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d2">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 2<br/>e.g. Students]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d3">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M12 8v4l3 3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 3<br/>e.g. Men / Women]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+    <div class="min-card reveal reveal-d4">
+      <div class="min-card-bg">
+        <svg width="40" height="40" fill="none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><circle cx="12" cy="10" r="3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+        [ MINISTRY PHOTO — 600×800px ]
+      </div>
+      <div class="min-card-overlay"></div>
+      <div class="min-card-label">
+        <p class="min-card-tag">Ministry</p>
+        <h3 class="min-card-name"><span class="ph" style="background:transparent;border:none;padding:0;color:white">[MINISTRY 4<br/>e.g. Missions]</span></h3>
+        <p class="min-card-arrow">Learn More →</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;padding:72px 0 0;">
+    <p class="body-text" style="margin-bottom:20px;">Not sure where to start? Come say hello on Sunday and we'll help you find your fit.</p>
+    <a href="visit.html" class="btn btn-dark">Plan a Visit →</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/images/logo-white.webp" alt="Grace Baptist Dacula" style="height:36px;width:auto;display:block;" />
+        </div>
+        <p class="body-text" style="color:rgba(255,255,255,0.4);font-size:15px">People loving other imperfect people the way Christ Jesus loves us.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/gbcdacula" target="_blank" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@GraceBaptistDacula" target="_blank" class="social-btn" title="YouTube">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="currentColor" stroke-width="2"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Podcast">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Visit</p>
+        <ul>
+          <li><a href="visit.html">Plan a Visit</a></li>
+          <li><a href="visit.html">Service Times</a></li>
+          <li><a href="visit.html">Directions &amp; Parking</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Grow</p>
+        <ul>
+          <li><a href="sermons.html">Sermon Archive</a></li>
+          <li><a href="visit.html">Bible Studies</a></li>
+          <li><a href="about.html">Baptism</a></li>
+          <li><a href="about.html">Membership</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Serve</p>
+        <ul>
+          
+          
+          <li><a href="visit.html">Prayer Request</a></li>
+          <li><a href="give.html">Give</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Grace Baptist Dacula. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
