@@ -438,6 +438,8 @@
 <script src="assets/js/main.js"></script>
 <script>
   const RSS_URL = 'https://feeds.buzzsprout.com/2620344.rss';
+  const CACHE_KEY = 'moh_episodes_cache';
+  const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
   function formatDate(dateStr) {
     if (!dateStr) return '';
@@ -448,6 +450,7 @@
   function formatDuration(secs) {
     if (!secs) return '';
     const s = parseInt(secs, 10);
+    if (isNaN(s)) return '';
     const h = Math.floor(s / 3600);
     const m = Math.floor((s % 3600) / 60);
     const sec = s % 60;
@@ -455,16 +458,21 @@
     return `${m}:${String(sec).padStart(2,'0')}`;
   }
 
+  function playIcon() {
+    return `<svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
+  }
+  function pauseIcon() {
+    return `<svg width="16" height="16" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>`;
+  }
+
   function togglePlayer(id) {
     const player = document.getElementById('player-' + id);
     if (!player) return;
     const isOpen = player.classList.contains('open');
-    // Close all other players
     document.querySelectorAll('.episode-player.open').forEach(p => {
       p.classList.remove('open');
       const audio = p.querySelector('audio');
       if (audio) audio.pause();
-      // Reset play button
       const btn = document.getElementById('playbtn-' + p.dataset.id);
       if (btn) btn.innerHTML = playIcon();
     });
@@ -477,18 +485,9 @@
     }
   }
 
-  function playIcon() {
-    return `<svg width="16" height="16" fill="white" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
-  }
-
-  function pauseIcon() {
-    return `<svg width="16" height="16" fill="white" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>`;
-  }
-
   function buildEpisodeItem(ep, index) {
-    const id = 'ep-' + index;
     return `
-      <div class="episode-item" id="${id}">
+      <div class="episode-item">
         <div class="episode-num">${ep.episodeNum || (index + 1)}</div>
         <div class="episode-info">
           <span class="episode-date">${formatDate(ep.pubDate)}</span>
@@ -499,108 +498,147 @@
           <button class="episode-play-btn" id="playbtn-${index}" onclick="togglePlayer(${index})" title="Play episode">
             ${playIcon()}
           </button>
-        ` : ''}
-        ${ep.audioUrl ? `
           <div class="episode-player" id="player-${index}" data-id="${index}">
             <audio controls preload="none" style="width:100%;">
               <source src="${ep.audioUrl}" type="audio/mpeg" />
-              Your browser does not support audio playback.
             </audio>
           </div>
         ` : ''}
       </div>`;
   }
 
-  async function fetchRSS(url) {
-    const proxies = [
-      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-    ];
-    for (const proxy of proxies) {
-      try {
-        const res = await fetch(proxy, { signal: AbortSignal.timeout(10000) });
-        if (!res.ok) continue;
-        const text = await res.text();
-        if (text.trim().startsWith('{')) {
-          const json = JSON.parse(text);
-          return json.contents || json.data || '';
-        }
-        return text;
-      } catch { /* try next */ }
+  // Try fetching with a timeout; returns raw text or throws
+  async function tryFetch(url, timeoutMs = 8000) {
+    const res = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.text();
+  }
+
+  // Extract XML string from proxy response (may be JSON wrapper or raw XML)
+  function extractXML(text) {
+    const t = text.trim();
+    if (t.startsWith('{')) {
+      const json = JSON.parse(t);
+      return json.contents || json.data || '';
     }
-    throw new Error('Could not load feed');
+    return t;
+  }
+
+  async function fetchRSS() {
+    // Check session cache first
+    try {
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { ts, xml } = JSON.parse(cached);
+        if (Date.now() - ts < CACHE_TTL) return xml;
+      }
+    } catch {}
+
+    const encoded = encodeURIComponent(RSS_URL);
+    const sources = [
+      // Direct fetch — Buzzsprout sets CORS headers on RSS feeds
+      { url: RSS_URL, direct: true },
+      // Proxy fallbacks
+      { url: `https://api.allorigins.win/get?url=${encoded}` },
+      { url: `https://corsproxy.io/?url=${encoded}` },
+      { url: `https://api.codetabs.com/v1/proxy?quest=${encoded}` },
+      { url: `https://thingproxy.freeboard.io/fetch/${RSS_URL}` },
+    ];
+
+    for (const src of sources) {
+      try {
+        const raw = await tryFetch(src.url, 7000);
+        const xml = src.direct ? raw : extractXML(raw);
+        if (!xml || !xml.includes('<item>')) continue; // sanity check
+        // Cache success
+        try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), xml })); } catch {}
+        return xml;
+      } catch { /* try next source */ }
+    }
+    throw new Error('All sources failed');
   }
 
   function parseRSS(xmlStr) {
     const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
-    const items = Array.from(doc.querySelectorAll('item'));
-    return items.map((item, i) => {
+    return Array.from(doc.querySelectorAll('item')).map((item, i) => {
       const enclosure = item.querySelector('enclosure');
-      const duration = item.querySelector('duration')?.textContent?.trim() || '';
-      const epNumEl = item.querySelector('episode');
+      const ns = (tag) => item.getElementsByTagNameNS('http://www.itunes.com/dtds/podcast-1.0.dtd', tag)[0]?.textContent?.trim() || '';
       return {
         title: item.querySelector('title')?.textContent?.trim() || 'Untitled',
         pubDate: item.querySelector('pubDate')?.textContent?.trim() || '',
         audioUrl: enclosure?.getAttribute('url') || '',
-        duration,
-        episodeNum: epNumEl?.textContent?.trim() || ''
+        duration: ns('duration'),
+        episodeNum: ns('episode') || item.querySelector('episode')?.textContent?.trim() || ''
       };
     });
   }
 
+  function showComingSoon() {
+    document.getElementById('episode-list').innerHTML = `
+      <div class="episodes-loading">
+        <div class="episodes-loading-icon">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
+            <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="episodes-soon-title">Episodes Coming Soon</p>
+        <p class="episodes-soon-sub">Marty Von's Moments of Hope podcast is on its way. Check back soon for short, encouraging reflections from God's Word.</p>
+        <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="btn btn-dark" style="margin-top:16px;">Subscribe via RSS →</a>
+      </div>`;
+  }
+
+  function showError() {
+    document.getElementById('episode-list').innerHTML = `
+      <div class="episodes-loading">
+        <div class="episodes-loading-icon">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
+            <path d="M12 8v4m0 4h.01" stroke="var(--stone)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="episodes-soon-title" style="font-size:18px;">Couldn't Load Episodes</p>
+        <p class="episodes-soon-sub">There was a temporary connection issue. You can try again or listen directly on Buzzsprout.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px;">
+          <button onclick="retryLoad()" class="btn btn-dark">Try Again</button>
+          <a href="https://www.buzzsprout.com/2620344" target="_blank" class="btn btn-dark" style="background:var(--sage);">Listen on Buzzsprout →</a>
+        </div>
+      </div>`;
+  }
+
   async function loadEpisodes() {
     const list = document.getElementById('episode-list');
-    const loadingState = document.getElementById('loading-state');
     const countEl = document.getElementById('episodes-count');
 
+    list.innerHTML = `
+      <div class="episodes-loading" style="padding:60px 0;">
+        <p style="font-size:14px;color:var(--stone);">Loading episodes…</p>
+      </div>`;
+
     try {
-      const xml = await fetchRSS(RSS_URL);
+      const xml = await fetchRSS();
       const episodes = parseRSS(xml);
 
-      list.innerHTML = '';
-
-      if (!episodes.length) {
-        list.innerHTML = `
-          <div class="episodes-loading">
-            <div class="episodes-loading-icon">
-              <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
-                <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
-                <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <p class="episodes-soon-title">Episodes Coming Soon</p>
-            <p class="episodes-soon-sub">Marty Von's Moments of Hope podcast is on its way. Check back soon for short, encouraging reflections from God's Word.</p>
-            <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="btn btn-dark" style="margin-top:16px;">Subscribe via RSS →</a>
-          </div>`;
-        return;
-      }
+      if (!episodes.length) { showComingSoon(); return; }
 
       countEl.textContent = `${episodes.length} episode${episodes.length !== 1 ? 's' : ''}`;
       list.innerHTML = episodes.map((ep, i) => buildEpisodeItem(ep, i)).join('');
 
-      // Animate in
       list.querySelectorAll('.episode-item').forEach((el, i) => {
         el.style.opacity = '0';
-        el.style.transition = `opacity 0.4s ease ${i * 0.06}s`;
-        setTimeout(() => { el.style.opacity = '1'; }, 50 + i * 60);
+        el.style.transition = `opacity 0.4s ease ${i * 0.07}s`;
+        setTimeout(() => { el.style.opacity = '1'; }, 50 + i * 70);
       });
-
-    } catch (err) {
-      list.innerHTML = `
-        <div class="episodes-loading">
-          <div class="episodes-loading-icon">
-            <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke="var(--sand)" stroke-width="2"/>
-              <circle cx="12" cy="12" r="3" stroke="var(--sage)" stroke-width="2"/>
-              <path d="M5 12a7 7 0 017-7M19 12a7 7 0 01-7 7" stroke="var(--sage)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <p class="episodes-soon-title">Episodes Coming Soon</p>
-          <p class="episodes-soon-sub">Marty Von's Moments of Hope podcast is on its way. Check back soon for short, encouraging reflections from God's Word.</p>
-          <a href="https://feeds.buzzsprout.com/2620344.rss" target="_blank" class="btn btn-dark" style="margin-top:16px;">Subscribe via RSS →</a>
-        </div>`;
+    } catch {
+      showError();
     }
+  }
+
+  function retryLoad() {
+    // Clear cache so we really retry
+    try { sessionStorage.removeItem(CACHE_KEY); } catch {}
+    loadEpisodes();
   }
 
   loadEpisodes();
