@@ -525,24 +525,19 @@
   }
 
   async function fetchRSS() {
-    // Check session cache first
-    try {
-      const cached = sessionStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const { ts, xml } = JSON.parse(cached);
-        if (Date.now() - ts < CACHE_TTL) return xml;
-      }
-    } catch {}
+    // Append a timestamp so each proxy treats this as a unique URL and
+    // cannot serve a stale cached response from a previous fetch.
+    const freshURL = `${RSS_URL}?_t=${Date.now()}`;
+    const encoded  = encodeURIComponent(freshURL);
 
-    const encoded = encodeURIComponent(RSS_URL);
     const sources = [
-      // Direct fetch — Buzzsprout sets CORS headers on RSS feeds
+      // Direct fetch — Buzzsprout supports CORS on RSS feeds
       { url: RSS_URL, direct: true },
-      // Proxy fallbacks
-      { url: `https://api.allorigins.win/get?url=${encoded}` },
+      // Proxy fallbacks (timestamp in URL busts their server-side cache)
       { url: `https://corsproxy.io/?url=${encoded}` },
+      { url: `https://api.allorigins.win/get?url=${encoded}` },
       { url: `https://api.codetabs.com/v1/proxy?quest=${encoded}` },
-      { url: `https://thingproxy.freeboard.io/fetch/${RSS_URL}` },
+      { url: `https://thingproxy.freeboard.io/fetch/${freshURL}` },
     ];
 
     for (const src of sources) {
