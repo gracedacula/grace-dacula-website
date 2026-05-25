@@ -1139,3 +1139,27 @@ footer {
   .min-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
 }
+
+/* ──────────────────────────────────────────
+   SERMONS PAGE — mobile grid
+────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .sermon-grid-page {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ──────────────────────────────────────────
+   STAFF BIO PAGES — mobile layout
+────────────────────────────────────────── */
+@media (max-width: 780px) {
+  .staff-bio-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  /* Disable sticky so the card scrolls naturally above the text */
+  .staff-bio-grid > div:first-child {
+    position: static !important;
+    top: auto !important;
+  }
+}
