@@ -335,6 +335,89 @@ a  { text-decoration: none; color: inherit; }
 .mobile-menu a:hover { color: var(--sage); }
 
 /* ──────────────────────────────────────────
+   2026 THEME BANNER
+────────────────────────────────────────── */
+.theme-banner {
+  display: block;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  border-top: 1px solid rgba(210,160,60,0.15);
+  border-bottom: 1px solid rgba(210,160,60,0.15);
+  transition: background 0.3s ease;
+}
+.theme-banner:hover { background: #222330; }
+.theme-banner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 120% at 50% 100%, rgba(210,160,60,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.theme-banner .container { position: relative; z-index: 1; }
+.theme-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+}
+.theme-banner-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(210,160,60,0.12);
+  border: 1px solid rgba(210,160,60,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+.theme-banner:hover .theme-banner-icon { background: rgba(210,160,60,0.2); }
+.theme-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.theme-banner-eyebrow {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(210,160,60,0.75);
+}
+.theme-banner-title {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+.theme-banner-sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+}
+.theme-banner-arrow {
+  color: rgba(210,160,60,0.7);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.theme-banner:hover .theme-banner-arrow {
+  transform: translateX(4px);
+  color: #D2A03C;
+}
+@media (max-width: 640px) {
+  .theme-banner-sub { display: none; }
+  .theme-banner-title { font-size: 18px; }
+}
+
+/* ──────────────────────────────────────────
    PAGE HEADER (inner pages)
 ────────────────────────────────────────── */
 .page-header {
