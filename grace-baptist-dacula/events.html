@@ -11,6 +11,280 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+/* ─── EVENT CARDS ─── */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 52px;
+}
+@media (max-width: 700px) { .event-grid { grid-template-columns: 1fr; } }
+
+.event-card {
+  background: var(--white);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+}
+
+.event-card-date {
+  background: var(--ink);
+  padding: 18px 22px 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.event-card-dow {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+  text-transform: uppercase;
+  align-self: center;
+  padding-bottom: 2px;
+}
+.event-card-day {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 46px;
+  color: var(--white);
+  line-height: 1;
+}
+.event-card-month {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  align-self: center;
+  padding-bottom: 2px;
+}
+
+.event-card-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
+}
+.event-card-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--near-black);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.event-card-time {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.event-card-location {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--stone);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.event-card-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.event-badge {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  background: rgba(122,140,126,0.12);
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+.event-badge-inperson {
+  color: var(--stone);
+  background: rgba(141,129,120,0.1);
+}
+
+.btn-join {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: 3px;
+  background: var(--sage);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.btn-join:hover { background: #677a6b; transform: translateY(-1px); }
+.btn-join svg { flex-shrink: 0; }
+
+/* Load more */
+.events-load-more-wrap {
+  text-align: center;
+}
+
+/* ─── TWO-COLUMN EVENTS LAYOUT ─── */
+.events-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .events-layout {
+    grid-template-columns: 1fr;
+  }
+  .announcements-sidebar {
+    order: -1;
+  }
+}
+@media (min-width: 961px) {
+  .announcements-sidebar {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+/* ─── ANNOUNCEMENTS SIDEBAR ─── */
+.announcements-sidebar {
+}
+.announcements-sidebar-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+.announcement-card {
+  background: var(--white);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  margin-bottom: 20px;
+}
+.announcement-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.announcement-card-img-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--sand);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--stone);
+}
+.announcement-card-img-placeholder svg {
+  opacity: 0.35;
+}
+.announcement-card-img-placeholder span {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.announcement-card-body {
+  padding: 18px 20px 20px;
+}
+.announcement-card-tag {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 6px;
+}
+.announcement-card-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--near-black);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.announcement-card-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--stone);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Loading / empty / error states */
+.events-status {
+  text-align: center;
+  padding: 80px 0;
+  grid-column: 1 / -1;
+}
+.events-status-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--sand);
+  border-top-color: var(--sage);
+  border-radius: 50%;
+  animation: ev-spin 0.75s linear infinite;
+  margin: 0 auto 18px;
+}
+@keyframes ev-spin { to { transform: rotate(360deg); } }
+.events-status p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--stone);
+  font-weight: 300;
+}
+.events-status .status-label {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 8px;
+}
+</style>
 </head>
 <body>
 
@@ -68,26 +342,59 @@
     <div class="page-header-content">
       <p class="label">What's Coming Up</p>
       <h1 class="section-title">Upcoming <span>Events</span></h1>
-      <p class="body-text">Stay in the loop — the calendar below updates automatically whenever a new event is added.</p>
+      <p class="body-text">Stay in the loop — events update automatically whenever something new is added.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── CALENDAR ─── -->
+<!-- ─── EVENTS ─── -->
 <section class="events">
   <div class="container">
-    <div class="reveal" style="border-radius:8px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.06);">
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=gracedacula%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=AGENDA&color=%237A8C7E"
-        style="border:0;width:100%;height:600px;display:block;"
-        frameborder="0"
-        scrolling="no"
-        title="Grace Baptist Dacula Events Calendar">
-      </iframe>
-    </div>
-    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--stone);font-weight:300">
-      Events update automatically. Questions? Email <a href="mailto:info@gracebaptistdacula.com" style="color:var(--sage)">info@gracebaptistdacula.com</a>
-    </p>
+    <div class="events-layout">
+
+      <!-- ── LEFT: Event cards ── -->
+      <div>
+        <!-- Card grid — populated by JS -->
+        <div class="event-grid reveal" id="event-grid">
+          <!-- Loading state -->
+          <div class="events-status" id="events-status">
+            <div class="events-status-spinner"></div>
+            <p>Loading events…</p>
+          </div>
+        </div>
+
+        <!-- Load more button -->
+        <div class="events-load-more-wrap" id="load-more-wrap" style="display:none;">
+          <button class="btn btn-dark" id="load-more-btn" onclick="showMore()">
+            Show More
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </button>
+        </div>
+
+        <p style="text-align:center;margin-top:28px;font-size:13px;color:var(--stone);font-weight:300">
+          Questions about an event? Email <a href="mailto:info@gracebaptistdacula.com" style="color:var(--sage)">info@gracebaptistdacula.com</a>
+        </p>
+      </div>
+
+      <!-- ── RIGHT: Announcements sidebar ── -->
+      <aside class="announcements-sidebar reveal">
+        <p class="announcements-sidebar-label">Announcements</p>
+
+        <!-- Announcement: Ladies Bible Study -->
+        <div class="announcement-card">
+          <img src="assets/images/ladies_bible_study_cover.png" alt="Ladies Bible Study" class="announcement-card-img">
+          <div class="announcement-card-body">
+            <p class="announcement-card-tag">Women's Ministry</p>
+            <p class="announcement-card-title">Ladies Bible Study</p>
+            <p class="announcement-card-desc">Ladies Bible Study resumes this fall. We'd love to have you join us — stay tuned for details on dates and times.</p>
+          </div>
+        </div>
+
+        <!-- Add more announcement cards here following the same pattern -->
+
+      </aside>
+
+    </div><!-- /.events-layout -->
   </div>
 </section>
 
@@ -126,7 +433,6 @@
           <li><a href="visit.html">Plan a Visit</a></li>
           <li><a href="visit.html">Service Times</a></li>
           <li><a href="visit.html">Directions &amp; Parking</a></li>
-          
         </ul>
       </div>
       <div class="footer-col">
@@ -141,11 +447,9 @@
       <div class="footer-col">
         <p class="footer-col-title">Serve</p>
         <ul>
-          
-          
           <li><a href="visit.html">Prayer Request</a></li>
           <li><a href="resources.html">Resources</a></li>
-      <li><a href="give.html">Give</a></li>
+          <li><a href="give.html">Give</a></li>
         </ul>
       </div>
     </div>
@@ -156,5 +460,134 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/events-data.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────
+//  To add or edit events, open:
+//  assets/js/events-data.js
+//  No other files need to be touched.
+// ─────────────────────────────────────────────────────────────
+
+const PAGE_SIZE = 6;
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+let allEvents = [];
+let shown     = 0;
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// ─── Card builder ──────────────────────────────────────────
+
+function buildCard(ev) {
+  // Parse date as local (avoid UTC shift by appending T00:00)
+  const date  = new Date(ev.date + 'T00:00');
+  const dow   = DAYS[date.getDay()];
+  const day   = date.getDate();
+  const month = MONTHS[date.getMonth()];
+
+  const timeRange = ev.start
+    ? (ev.end ? `${ev.start} – ${ev.end}` : ev.start)
+    : 'All Day';
+
+  const isOnline = !!ev.zoom;
+
+  const card = document.createElement('div');
+  card.className = 'event-card reveal';
+
+  card.innerHTML = `
+    <div class="event-card-date">
+      <span class="event-card-dow">${dow}</span>
+      <span class="event-card-day">${day}</span>
+      <span class="event-card-month">${month}</span>
+    </div>
+    <div class="event-card-body">
+      <div class="event-card-title">${escHtml(ev.title)}</div>
+      <div class="event-card-time">${escHtml(timeRange)}</div>
+      ${ev.location && !isOnline ? `<div class="event-card-location">
+        <svg width="12" height="12" fill="none" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" stroke="currentColor" stroke-width="1.8"/></svg>
+        ${escHtml(ev.location)}
+      </div>` : ''}
+      ${ev.note ? `<div class="event-card-time" style="font-style:italic">${escHtml(ev.note)}</div>` : ''}
+      <div class="event-card-footer">
+        ${isOnline
+          ? `<span class="event-badge">Online</span>
+             <a href="mailto:info@gracebaptistdacula.com?subject=Zoom%20Link%20Request&body=Hi%2C%20I%27d%20love%20to%20join%20${encodeURIComponent(ev.title)}%20on%20Zoom.%20Could%20you%20send%20me%20the%20link%3F%20Thank%20you!" class="btn-join">
+               Request Link
+               <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+             </a>`
+          : `<span class="event-badge event-badge-inperson">In Person</span>`
+        }
+      </div>
+    </div>
+  `;
+
+  return card;
+}
+
+// ─── Render ────────────────────────────────────────────────
+
+function renderBatch() {
+  const grid  = document.getElementById('event-grid');
+  const batch = allEvents.slice(shown, shown + PAGE_SIZE);
+
+  batch.forEach(ev => grid.appendChild(buildCard(ev)));
+  shown += batch.length;
+
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => revealObserver.observe(el));
+
+  document.getElementById('load-more-wrap').style.display =
+    shown < allEvents.length ? 'block' : 'none';
+}
+
+function showMore() { renderBatch(); }
+
+function showStatus(html) {
+  const existing = document.getElementById('events-status');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.id = 'events-status';
+  div.className = 'events-status';
+  div.innerHTML = html;
+  document.getElementById('event-grid').appendChild(div);
+}
+
+// ─── Init ──────────────────────────────────────────────────
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Filter out past events and sort ascending
+  allEvents = (GRACE_EVENTS || [])
+    .filter(ev => new Date(ev.date + 'T00:00') >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  document.getElementById('events-status').remove();
+
+  if (allEvents.length === 0) {
+    showStatus(`
+      <div class="status-label">Nothing scheduled yet</div>
+      <p>Check back soon — new events will appear here as they're added.</p>
+    `);
+    return;
+  }
+
+  renderBatch();
+});
+</script>
 </body>
 </html>
