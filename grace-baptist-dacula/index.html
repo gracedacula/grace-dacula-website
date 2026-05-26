@@ -392,26 +392,43 @@
       .finally(() => clearTimeout(timer));
   }
 
-  // Piped API — native CORS, tries handle then channel ID
-  async function fetchVideos(limit) {
-    const endpoints = [
-      `https://pipedapi.kavin.rocks/c/${YT_HANDLE}`,
-      `https://pipedapi.kavin.rocks/channel/${YT_CHANNEL_ID}`
-    ];
-    for (const endpoint of endpoints) {
-      try {
-        const res = await fetchWithTimeout(endpoint, 8000);
-        if (!res.ok) continue;
-        const data = await res.json();
-        const videos = (data.relatedStreams || []).slice(0, limit).map(v => ({
+  // Fire all sources in parallel — first one that succeeds wins
+  function tryInvidious(host, limit) {
+    return fetchWithTimeout(`${host}/api/v1/channels/c/${YT_HANDLE}`, 8000)
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        const videos = (d.latestVideos || []).slice(0, limit).map(v => ({
+          videoId: v.videoId,
+          title: v.title || 'Untitled',
+          pubDate: (v.published || 0) * 1000
+        })).filter(v => v.videoId);
+        if (!videos.length) throw new Error('empty');
+        return videos;
+      });
+  }
+
+  function tryPiped(host, limit) {
+    return fetchWithTimeout(`${host}/c/${YT_HANDLE}`, 8000)
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        const videos = (d.relatedStreams || []).slice(0, limit).map(v => ({
           videoId: (v.url || '').split('v=')[1],
           title: v.title || 'Untitled',
           pubDate: v.uploaded || Date.now()
         })).filter(v => v.videoId);
-        if (videos.length) return videos;
-      } catch { /* try next */ }
-    }
-    throw new Error('All sources failed');
+        if (!videos.length) throw new Error('empty');
+        return videos;
+      });
+  }
+
+  function fetchVideos(limit) {
+    return Promise.any([
+      tryInvidious('https://yewtu.be', limit),
+      tryInvidious('https://inv.riverside.rocks', limit),
+      tryPiped('https://api.piped.projectsegfau.lt', limit),
+      tryPiped('https://piped-api.garudalinux.org', limit),
+      tryPiped('https://pipedapi.kavin.rocks', limit)
+    ]);
   }
 
   async function loadSermons() {
