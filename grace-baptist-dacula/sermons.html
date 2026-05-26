@@ -182,11 +182,11 @@
 
 <script src="assets/js/main.js"></script>
 <script>
+  const YT_HANDLE = 'GraceBaptistDacula';
   const YT_CHANNEL_ID = 'UCJoJOLxLC_5LtJ1MSISZhig';
-  const YT_RSS = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID;
 
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
+  function formatDate(ts) {
+    const d = new Date(ts);
     return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 
@@ -219,19 +219,6 @@
       </a>`;
   }
 
-  function parseXML(xmlStr) {
-    const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
-    return Array.from(doc.querySelectorAll('entry')).slice(0, 9).map(e => {
-      const idText = e.querySelector('id')?.textContent || '';
-      const videoId = idText.includes('yt:video:') ? idText.split('yt:video:')[1] : idText.split(':').pop();
-      return {
-        videoId,
-        title: e.querySelector('title')?.textContent || 'Untitled',
-        pubDate: e.querySelector('published')?.textContent || ''
-      };
-    }).filter(v => v.videoId);
-  }
-
   function fetchWithTimeout(url, ms) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), ms);
@@ -239,32 +226,33 @@
       .finally(() => clearTimeout(timer));
   }
 
-  async function fetchXML(url) {
-    const proxies = [
-      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+  // Piped API — native CORS, tries handle then channel ID
+  async function fetchVideos() {
+    const endpoints = [
+      `https://pipedapi.kavin.rocks/c/${YT_HANDLE}`,
+      `https://pipedapi.kavin.rocks/channel/${YT_CHANNEL_ID}`
     ];
-    for (const proxy of proxies) {
+    for (const endpoint of endpoints) {
       try {
-        const res = await fetchWithTimeout(proxy, 8000);
+        const res = await fetchWithTimeout(endpoint, 8000);
         if (!res.ok) continue;
-        // allorigins wraps in JSON; codetabs returns raw XML
-        const text = await res.text();
-        if (text.trim().startsWith('{')) {
-          const json = JSON.parse(text);
-          return json.contents || json.data || '';
-        }
-        return text;
+        const data = await res.json();
+        const videos = (data.relatedStreams || []).slice(0, 9).map(v => ({
+          videoId: (v.url || '').split('v=')[1],
+          title: v.title || 'Untitled',
+          pubDate: v.uploaded || Date.now()
+        })).filter(v => v.videoId);
+        if (videos.length) return videos;
       } catch { /* try next */ }
     }
-    throw new Error('All proxies failed');
+    throw new Error('All sources failed');
   }
 
   async function loadSermons() {
     try {
-      const xml = await fetchXML(YT_RSS);
-      const videos = parseXML(xml);
-      if (!videos.length) throw new Error('No entries parsed');
+      const videos = await fetchVideos();
+      if (!videos.length) throw new Error('No videos found');
+
       const grid = document.getElementById('sermon-grid');
       grid.innerHTML = videos.map(v => buildSermonCard(v)).join('');
       grid.querySelectorAll('a').forEach((el, i) => {
