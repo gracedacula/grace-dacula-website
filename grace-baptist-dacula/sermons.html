@@ -226,43 +226,41 @@
       .finally(() => clearTimeout(timer));
   }
 
-  // Fire all sources in parallel — first one that succeeds wins
-  function tryInvidious(host, limit) {
-    return fetchWithTimeout(`${host}/api/v1/channels/c/${YT_HANDLE}`, 8000)
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(d => {
-        const videos = (d.latestVideos || []).slice(0, limit).map(v => ({
-          videoId: v.videoId,
-          title: v.title || 'Untitled',
-          pubDate: (v.published || 0) * 1000
-        })).filter(v => v.videoId);
-        if (!videos.length) throw new Error('empty');
-        return videos;
-      });
-  }
+  async function fetchVideos(limit) {
+    const proxy = url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 
-  function tryPiped(host, limit) {
-    return fetchWithTimeout(`${host}/c/${YT_HANDLE}`, 8000)
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(d => {
-        const videos = (d.relatedStreams || []).slice(0, limit).map(v => ({
-          videoId: (v.url || '').split('v=')[1],
-          title: v.title || 'Untitled',
-          pubDate: v.uploaded || Date.now()
-        })).filter(v => v.videoId);
-        if (!videos.length) throw new Error('empty');
-        return videos;
-      });
-  }
+    // Step 1: Fetch the channel page to discover the real channel ID
+    const pageRes = await fetchWithTimeout(proxy('https://www.youtube.com/@' + YT_HANDLE), 10000);
+    if (!pageRes.ok) throw new Error('Channel page fetch failed');
+    const pageData = await pageRes.json();
+    const html = pageData.contents || '';
 
-  function fetchVideos(limit) {
-    return Promise.any([
-      tryInvidious('https://yewtu.be', limit),
-      tryInvidious('https://inv.riverside.rocks', limit),
-      tryPiped('https://api.piped.projectsegfau.lt', limit),
-      tryPiped('https://piped-api.garudalinux.org', limit),
-      tryPiped('https://pipedapi.kavin.rocks', limit)
-    ]);
+    // Extract channel ID from canonical link or embedded JSON
+    const idMatch = html.match(/\/channel\/(UC[\w-]{22})/)
+                 || html.match(/"channelId":"(UC[\w-]{22})"/)
+                 || html.match(/"externalId":"(UC[\w-]{22})"/);
+    if (!idMatch) throw new Error('Could not find channel ID in page');
+    const channelId = idMatch[1];
+
+    // Step 2: Fetch RSS feed with the discovered channel ID
+    const rssRes = await fetchWithTimeout(
+      proxy(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`), 10000
+    );
+    if (!rssRes.ok) throw new Error('RSS fetch failed');
+    const rssData = await rssRes.json();
+    const xml = rssData.contents || '';
+
+    // Step 3: Parse the XML
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    return Array.from(doc.querySelectorAll('entry')).slice(0, limit).map(e => {
+      const idText = e.querySelector('id')?.textContent || '';
+      const videoId = idText.includes('yt:video:') ? idText.split('yt:video:')[1] : idText.split(':').pop();
+      return {
+        videoId,
+        title: e.querySelector('title')?.textContent || 'Untitled',
+        pubDate: new Date(e.querySelector('published')?.textContent || '').getTime() || Date.now()
+      };
+    }).filter(v => v.videoId);
   }
 
   async function loadSermons() {
