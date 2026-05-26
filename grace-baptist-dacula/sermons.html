@@ -226,31 +226,35 @@
       .finally(() => clearTimeout(timer));
   }
 
+  // Race multiple CORS proxies — whichever responds first wins
+  function fetchViaProxy(targetUrl) {
+    return Promise.any([
+      fetchWithTimeout(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, 9000)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(d => { if (!d.contents) throw new Error('empty'); return d.contents; }),
+      fetchWithTimeout(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, 9000)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(t => { if (!t) throw new Error('empty'); return t; }),
+      fetchWithTimeout(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`, 9000)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(t => { if (!t) throw new Error('empty'); return t; })
+    ]);
+  }
+
   async function fetchVideos(limit) {
-    const proxy = url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-
-    // Step 1: Fetch the channel page to discover the real channel ID
-    const pageRes = await fetchWithTimeout(proxy('https://www.youtube.com/@' + YT_HANDLE), 10000);
-    if (!pageRes.ok) throw new Error('Channel page fetch failed');
-    const pageData = await pageRes.json();
-    const html = pageData.contents || '';
-
-    // Extract channel ID from canonical link or embedded JSON
+    // Step 1: Fetch channel page to discover the real channel ID dynamically
+    const html = await fetchViaProxy('https://www.youtube.com/@' + YT_HANDLE);
     const idMatch = html.match(/\/channel\/(UC[\w-]{22})/)
                  || html.match(/"channelId":"(UC[\w-]{22})"/)
                  || html.match(/"externalId":"(UC[\w-]{22})"/);
-    if (!idMatch) throw new Error('Could not find channel ID in page');
-    const channelId = idMatch[1];
+    if (!idMatch) throw new Error('Channel ID not found');
 
-    // Step 2: Fetch RSS feed with the discovered channel ID
-    const rssRes = await fetchWithTimeout(
-      proxy(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`), 10000
+    // Step 2: Fetch RSS with the discovered ID
+    const xml = await fetchViaProxy(
+      `https://www.youtube.com/feeds/videos.xml?channel_id=${idMatch[1]}`
     );
-    if (!rssRes.ok) throw new Error('RSS fetch failed');
-    const rssData = await rssRes.json();
-    const xml = rssData.contents || '';
 
-    // Step 3: Parse the XML
+    // Step 3: Parse
     const doc = new DOMParser().parseFromString(xml, 'text/xml');
     return Array.from(doc.querySelectorAll('entry')).slice(0, limit).map(e => {
       const idText = e.querySelector('id')?.textContent || '';
