@@ -110,6 +110,42 @@
   }
   .resource-card:hover .resource-card-link { gap: 10px; }
 
+  /* Coming soon card — non-clickable */
+  .resource-card-static {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: block;
+    color: inherit;
+    cursor: default;
+  }
+  .resource-card-static .resource-card-art {
+    position: relative;
+  }
+  .coming-soon-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--sand);
+    padding: 10px 16px;
+    text-align: center;
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    z-index: 2;
+  }
+  .coming-soon-banner--blue {
+    background: rgba(28, 40, 32, 0.88);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: #fff;
+  }
+
   @media (max-width: 1024px) {
     .resources-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -201,6 +237,32 @@
           </span>
         </div>
       </a>
+
+      <!-- Grace Connect Card -->
+      <div class="resource-card-static reveal in">
+        <div class="resource-card-art">
+          <img src="assets/images/grace_connect_cover.png" alt="Grace Connect" />
+          <div class="coming-soon-banner">Coming September 2026</div>
+        </div>
+        <div class="resource-card-body">
+          <span class="resource-card-type">Mobile App</span>
+          <h2 class="resource-card-title">Grace Connect</h2>
+          <p class="resource-card-sub">Stay connected with Grace Baptist Dacula — sermons, events, giving, and more, all in one place.</p>
+        </div>
+      </div>
+
+      <!-- Grace Worship Playlist Card -->
+      <div class="resource-card-static reveal in">
+        <div class="resource-card-art">
+          <img src="assets/images/worship_playlist_cover.png" alt="Grace Worship Playlist" />
+          <div class="coming-soon-banner coming-soon-banner--blue">Coming Soon</div>
+        </div>
+        <div class="resource-card-body">
+          <span class="resource-card-type">Playlist</span>
+          <h2 class="resource-card-title">Grace Worship Playlist</h2>
+          <p class="resource-card-sub">A curated Spotify playlist of worship favorites from our church family.</p>
+        </div>
+      </div>
 
     </div>
   </div>
