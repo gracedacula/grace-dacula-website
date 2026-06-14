@@ -288,8 +288,11 @@
   .sl-month-card.is-current .sl-month-label {
     color: #B8891F;
   }
-  .sl-month-badge {
+  .sl-month-card.is-current .sl-month-badge {
     display: inline-block;
+  }
+  .sl-month-badge {
+    display: none;
     background: rgba(210,160,60,0.12);
     color: #B8891F;
     font-family: var(--font-head);
@@ -565,74 +568,85 @@
     </div>
     <div class="sl-monthly-grid">
 
-      <div class="sl-month-card is-past reveal">
+      <div class="sl-month-card reveal" data-month="1">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">January</div>
         <div class="sl-month-theme">Be Salt and Light</div>
         <p class="sl-month-desc">Launching the year with a focus on our identity as believers — called to season and illuminate every space we occupy.</p>
       </div>
 
-      <div class="sl-month-card is-past reveal">
+      <div class="sl-month-card reveal" data-month="2">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">February</div>
         <div class="sl-month-theme">"It Was So Sweet of You"</div>
         <p class="sl-month-desc">Community invitations — reaching out to neighbors, coworkers, and friends with intentional warmth and personal invitations to church.</p>
       </div>
 
-      <div class="sl-month-card is-past reveal">
+      <div class="sl-month-card reveal" data-month="3">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">March</div>
         <div class="sl-month-theme">Easter Service Invitations</div>
         <p class="sl-month-desc">The most significant Sunday of the year — invite someone to hear the Gospel. Every member, one invitation.</p>
       </div>
 
-      <div class="sl-month-card is-past reveal">
+      <div class="sl-month-card reveal" data-month="4">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">April</div>
         <div class="sl-month-theme">"Random Acts of Kindness"</div>
         <p class="sl-month-desc">A month-long emphasis on spontaneous, Spirit-led acts of kindness in our neighborhoods, schools, and workplaces.</p>
       </div>
 
-      <div class="sl-month-card is-current reveal">
+      <div class="sl-month-card reveal" data-month="5">
         <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">May</div>
         <div class="sl-month-theme">Prayer Walk &amp; New Neighbor Invitations</div>
         <p class="sl-month-desc">Walking our streets in prayer and delivering personal invitations to families who have recently moved into our church's neighborhood.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="6">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">June</div>
         <div class="sl-month-theme">Missions Emphasis</div>
         <p class="sl-month-desc">Celebrating and supporting Grace's missionary families — learning their stories, praying for their work, and giving toward the global mission.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="7">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">July</div>
         <div class="sl-month-theme">Blood Drive</div>
         <p class="sl-month-desc">Community outreach through a church-hosted blood drive — a tangible way to love our neighbors and serve those in need.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="8">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">August</div>
         <div class="sl-month-theme">Teacher Appreciation</div>
         <p class="sl-month-desc">Public school outreach — blessing the teachers and staff in our local schools as they begin a new year.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="9">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">September</div>
         <div class="sl-month-theme">"Coffee and Connection"</div>
         <p class="sl-month-desc">One-on-one neighbor outreach — meeting a neighbor for coffee, building a genuine relationship, and sharing God's love in person.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="10">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">October</div>
         <div class="sl-month-theme">Operation Christmas Child</div>
         <p class="sl-month-desc">Global outreach through Samaritan's Purse — packing shoeboxes full of gifts and the Gospel for children around the world.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="11">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">November</div>
         <div class="sl-month-theme">"Thank You for Your Service"</div>
         <p class="sl-month-desc">Veteran and first responder outreach — honoring those who serve and sacrifice, and expressing the gratitude of our church family.</p>
       </div>
 
-      <div class="sl-month-card reveal">
+      <div class="sl-month-card reveal" data-month="12">
+        <div class="sl-month-badge">This Month</div>
         <div class="sl-month-label">December</div>
         <div class="sl-month-theme">Cocoa and Carols</div>
         <p class="sl-month-desc">Neighborhood outreach — bringing the joy of Christmas to our streets through carols, warm drinks, and the light of Christ.</p>
@@ -747,5 +761,23 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script>
+  // Highlight the current month's card in the Salt & Light outreach calendar
+  (function () {
+    var currentMonth = new Date().getMonth() + 1; // 1-12
+    document.querySelectorAll('.sl-month-card[data-month]').forEach(function (card) {
+      var month = parseInt(card.getAttribute('data-month'), 10);
+      if (month === currentMonth) {
+        card.classList.add('is-current');
+        card.classList.remove('is-past');
+      } else if (month < currentMonth) {
+        card.classList.add('is-past');
+        card.classList.remove('is-current');
+      } else {
+        card.classList.remove('is-current', 'is-past');
+      }
+    });
+  })();
+</script>
 </body>
 </html>
