@@ -403,24 +403,23 @@
         .then(t => { if (!t) throw new Error('empty'); return t; }),
       fetchWithTimeout(`https://corsproxy.io/?${encodeURIComponent(targetUrl)}`, 9000)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(t => { if (!t) throw new Error('empty'); return t; }),
+      fetchWithTimeout(`https://thingproxy.freeboard.io/fetch/${targetUrl}`, 9000)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
         .then(t => { if (!t) throw new Error('empty'); return t; })
     ]);
   }
 
   async function fetchVideos(limit) {
-    // Step 1: Fetch channel page to discover the real channel ID dynamically
-    const html = await fetchViaProxy('https://www.youtube.com/@' + YT_HANDLE);
-    const idMatch = html.match(/\/channel\/(UC[\w-]{22})/)
-                 || html.match(/"channelId":"(UC[\w-]{22})"/)
-                 || html.match(/"externalId":"(UC[\w-]{22})"/);
-    if (!idMatch) throw new Error('Channel ID not found');
-
-    // Step 2: Fetch RSS with the discovered ID
+    // Fetch the RSS feed directly using the known channel ID.
+    // (We used to scrape the @handle channel page first to "discover" the ID,
+    // but that page is JS-heavy and often served differently to proxy IPs,
+    // which was the main reason this was silently failing. The RSS feed is
+    // plain XML and far more reliable to fetch through a CORS proxy.)
     const xml = await fetchViaProxy(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=${idMatch[1]}`
+      `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`
     );
 
-    // Step 3: Parse
     const doc = new DOMParser().parseFromString(xml, 'text/xml');
     return Array.from(doc.querySelectorAll('entry')).slice(0, limit).map(e => {
       const idText = e.querySelector('id')?.textContent || '';
